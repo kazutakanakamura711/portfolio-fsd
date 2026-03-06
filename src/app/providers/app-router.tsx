@@ -8,7 +8,7 @@ const AppRoutes = () => {
   return (
     <>
       <HeaderContainer />
-      <main className="pt-14">{element}</main>
+      <main className="max-w-6xl mx-auto px-4 py-20 md:px-8">{element}</main>
       <FooterContainer />
     </>
   )

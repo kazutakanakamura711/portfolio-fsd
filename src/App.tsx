@@ -1,4 +1,4 @@
-import './App.css'
+import '@/app/styles/app.css'
 
 function App() {
   return <>Hello React</>

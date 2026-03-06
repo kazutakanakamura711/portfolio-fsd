@@ -1,0 +1,34 @@
+import { useState } from 'react'
+
+import profileImage from '@/shared/assets/img-profile.jpg'
+import { Skeleton } from '@/shared/ui/shadcn/skeleton'
+
+export const TopProfile = () => {
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  return (
+    <section className="flex flex-col items-center gap-8">
+      <h2 className="text-2xl font-medium tracking-widest md:tracking-super-wide">
+        PROFILE
+      </h2>
+      <div className="relative w-40 h-40 overflow-hidden">
+        {!isLoaded && <Skeleton className="w-40 h-40 rounded-none" />}
+        <img
+          src={profileImage}
+          alt="Kazutaka Nakamura"
+          className={`w-40 h-40 object-cover transition-opacity duration-300 ${
+            isLoaded ? 'opacity-100' : 'opacity-0 absolute inset-0'
+          }`}
+          onLoad={() => setIsLoaded(true)}
+          onError={() => setIsLoaded(true)}
+        />
+      </div>
+      <div className="flex flex-col items-center gap-1">
+        <p className="font-medium tracking-widest">KAZUTAKA NAKAMURA</p>
+        <p className="text-muted-foreground tracking-wider">
+          フロントエンドエンジニア
+        </p>
+      </div>
+    </section>
+  )
+}

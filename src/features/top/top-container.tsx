@@ -1,3 +1,17 @@
+import { useTopApplications } from './model'
+import { TopHero, TopProfile } from './ui'
+import { TopApplications } from './ui/top-applications'
+import { TopGallery } from './ui/top-gallery'
+
 export const TopContainer = () => {
-  return <div>top-container</div>
+  const { applications, isLoading } = useTopApplications()
+
+  return (
+    <div className="flex flex-col gap-32">
+      <TopHero />
+      <TopProfile />
+      <TopApplications applications={applications} isLoading={isLoading} />
+      <TopGallery />
+    </div>
+  )
 }
