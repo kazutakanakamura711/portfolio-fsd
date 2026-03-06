@@ -45,7 +45,7 @@ export default [
     plugins: {
       '@typescript-eslint': tsPlugin,
       react: reactPlugin,
-      // 'react-hooks': fixupPluginRules(reactHooksPlugin),
+      'react-hooks': fixupPluginRules(reactHooksPlugin),
       'react-refresh': reactRefreshPlugin,
     },
     settings: {
@@ -86,7 +86,7 @@ export default [
       '@typescript-eslint/explicit-module-boundary-types': 'off',
 
       // 一般的なルール
-      'no-console': ['warn', { allow: ['warn', 'error'] }],
+      'no-console': ['warn', { allow: ['warn', 'error', 'log'] }],
       'prefer-const': 'warn',
       'no-var': 'error',
 
