@@ -42,16 +42,12 @@ export const Default: Story = {
 export const Vertical: Story = {
   render: () => (
     <div className="mx-auto max-w-md px-12">
-      <Carousel
-        orientation="vertical"
-        className="h-[320px]"
-        opts={{ loop: true }}
-      >
-        <CarouselContent className="h-[320px]">
+      <Carousel orientation="vertical" className="h-80" opts={{ loop: true }}>
+        <CarouselContent className="h-80">
           {[1, 2, 3].map((index) => (
             <CarouselItem key={index}>
               <Card>
-                <CardContent className="flex h-[100px] items-center justify-center">
+                <CardContent className="flex h-25 items-center justify-center">
                   <span className="text-lg font-semibold">Item {index}</span>
                 </CardContent>
               </Card>
