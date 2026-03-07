@@ -7,7 +7,7 @@ export const TopGallery = () => {
 
   return (
     <section className="flex flex-col gap-8">
-      <h2 className="text-4xl font-medium tracking-super-wide text-center">
+      <h2 className="text-2xl font-medium tracking-super-wide text-center">
         GALLERY
       </h2>
 

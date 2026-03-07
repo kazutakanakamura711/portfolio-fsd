@@ -4,6 +4,7 @@ import type { Applications } from '@/entities/microcms/applications'
 import applicationsImage from '@/shared/assets/top/img-top-applications.png'
 import { Skeleton } from '@/shared/ui/shadcn/skeleton'
 import { TopCarousel } from './top-carousel'
+import { Title } from '@/shared/ui'
 
 type Props = {
   applications: Applications[]
@@ -16,9 +17,7 @@ export const TopApplications = ({ applications, isLoading }: Props) => {
   if (isLoading) {
     return (
       <section className="flex flex-col gap-8">
-        <h2 className="text-4xl font-medium tracking-super-wide text-center">
-          APPLICATIONS
-        </h2>
+        <Title>APPLICATIONS</Title>
         <p className="text-center text-sm">Loading...</p>
       </section>
     )
@@ -27,9 +26,7 @@ export const TopApplications = ({ applications, isLoading }: Props) => {
   if (applications.length === 0) {
     return (
       <section className="flex flex-col gap-8">
-        <h2 className="text-4xl font-medium tracking-super-wide text-center">
-          APPLICATIONS
-        </h2>
+        <Title>APPLICATIONS</Title>
         <p className="text-center text-sm">No applications found.</p>
       </section>
     )
@@ -37,9 +34,7 @@ export const TopApplications = ({ applications, isLoading }: Props) => {
 
   return (
     <section className="flex flex-col gap-16">
-      <h2 className="text-2xl font-medium tracking-super-wide text-center">
-        APPLICATIONS
-      </h2>
+      <Title>APPLICATIONS</Title>
 
       {/* テキスト＋画像 */}
       <div className="flex flex-col md:flex-row gap-8 items-center">

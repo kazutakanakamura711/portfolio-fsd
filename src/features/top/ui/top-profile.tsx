@@ -2,15 +2,14 @@ import { useState } from 'react'
 
 import profileImage from '@/shared/assets/img-profile.jpg'
 import { Skeleton } from '@/shared/ui/shadcn/skeleton'
+import { Title } from '@/shared/ui'
 
 export const TopProfile = () => {
   const [isLoaded, setIsLoaded] = useState(false)
 
   return (
     <section className="flex flex-col items-center gap-8">
-      <h2 className="text-2xl font-medium tracking-widest md:tracking-super-wide">
-        PROFILE
-      </h2>
+      <Title>PROFILE</Title>
       <div className="relative w-40 h-40 overflow-hidden">
         {!isLoaded && <Skeleton className="w-40 h-40 rounded-none" />}
         <img
