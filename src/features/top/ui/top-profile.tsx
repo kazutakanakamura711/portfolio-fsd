@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import profileImage from '@/shared/assets/img-profile.jpg'
-import { Skeleton } from '@/shared/ui/shadcn/skeleton'
+import { Skeleton } from '@/shared/ui'
 import { Title } from '@/shared/ui'
 
 export const TopProfile = () => {

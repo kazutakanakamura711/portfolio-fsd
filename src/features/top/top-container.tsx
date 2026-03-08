@@ -1,10 +1,10 @@
-import { useTopApplications } from './model'
+import { useApplications } from '@/shared/hooks'
 import { TopHero, TopProfile } from './ui'
 import { TopApplications } from './ui/top-applications'
 import { TopGallery } from './ui/top-gallery'
 
 export const TopContainer = () => {
-  const { applications, isLoading } = useTopApplications()
+  const { applications, isLoading } = useApplications()
 
   return (
     <div className="flex flex-col gap-32">
