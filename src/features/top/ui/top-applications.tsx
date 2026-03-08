@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import type { Applications } from '@/entities/microcms/applications'
 import applicationsImage from '@/shared/assets/top/img-top-applications.png'
-import { Skeleton } from '@/shared/ui/shadcn/skeleton'
+import { Skeleton } from '@/shared/ui'
 import { TopCarousel } from './top-carousel'
 import { Title } from '@/shared/ui'
 

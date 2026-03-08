@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import galleryImage from '@/shared/assets/top/img-top-gallery.jpg'
-import { Skeleton } from '@/shared/ui/shadcn/skeleton'
+import { Skeleton } from '@/shared/ui'
 
 export const TopGallery = () => {
   const [isImageLoaded, setIsImageLoaded] = useState(false)

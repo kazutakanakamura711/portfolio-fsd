@@ -8,15 +8,13 @@ import {
   CarouselNext,
   CarouselPrevious,
   type CarouselApi,
-} from '@/shared/ui/shadcn/carousel'
-import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/shared/ui/shadcn/card'
-import { Skeleton } from '@/shared/ui/shadcn/skeleton'
+  Skeleton,
+} from '@/shared/ui'
 import { ExternalLink } from 'lucide-react'
 
 type Props = {

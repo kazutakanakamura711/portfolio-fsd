@@ -7,8 +7,8 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/shared/ui/shadcn/sheet'
-import { Button } from '@/shared/ui/shadcn/button'
+  Button,
+} from '@/shared/ui'
 
 const NAV_ITEMS = [
   { label: 'TOP', path: PATHS.TOP },

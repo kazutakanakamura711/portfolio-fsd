@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import heroImage from '@/shared/assets/top/img-top-hero.jpg'
-import { Skeleton } from '@/shared/ui/shadcn/skeleton'
+import { Skeleton } from '@/shared/ui'
 
 export const TopHero = () => {
   const [isLoaded, setIsLoaded] = useState(false)
