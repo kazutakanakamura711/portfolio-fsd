@@ -1,0 +1,31 @@
+{
+  "apiFields": [
+    { "fieldId": "title", "name": "title", "kind": "text", "required": true },
+    {
+      "fieldId": "description",
+      "name": "description",
+      "kind": "textArea",
+      "required": true
+    },
+    {
+      "fieldId": "thumbnail",
+      "name": "thumbnail",
+      "kind": "media",
+      "required": true
+    },
+    { "fieldId": "url", "name": "url", "kind": "text", "required": true },
+    {
+      "fieldId": "github_url",
+      "name": "github_url",
+      "kind": "text",
+      "required": true
+    },
+    {
+      "fieldId": "technologies",
+      "name": "technologies",
+      "kind": "text",
+      "required": true
+    }
+  ],
+  "customFields": []
+}
