@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Dialog, DialogContent } from '@/shared/ui/shadcn/dialog'
 
-import img01 from '@/shared/assets/gallery/img-gallery-01.png'
-import img02 from '@/shared/assets/gallery/img-gallery-02.jpg'
-import img03 from '@/shared/assets/gallery/img-gallery-03.jpg'
-import img04 from '@/shared/assets/gallery/img-gallery-04.jpg'
-import img05 from '@/shared/assets/gallery/img-gallery-05.png'
+import img01 from '@/shared/assets/gallery/img-gallery-01.webp'
+import img02 from '@/shared/assets/gallery/img-gallery-02.webp'
+import img03 from '@/shared/assets/gallery/img-gallery-03.webp'
+import img04 from '@/shared/assets/gallery/img-gallery-04.webp'
+import img05 from '@/shared/assets/gallery/img-gallery-05.webp'
 
 const GALLERY_IMAGES = [
   { src: img01, alt: 'gallery-01' },

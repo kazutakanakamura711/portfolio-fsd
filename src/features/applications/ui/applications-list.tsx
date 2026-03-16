@@ -22,7 +22,7 @@ const ApplicationItem = ({
       {/* 画像 */}
       <div className="w-full md:w-1/2">
         <img
-          src={application.thumbnail.url}
+          src={`${application.thumbnail.url}?w=800&q=75&fm=webp`}
           alt={application.title}
           className="w-full h-auto object-cover"
         />

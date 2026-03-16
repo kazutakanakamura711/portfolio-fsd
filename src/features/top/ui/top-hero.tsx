@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import heroImage from '@/shared/assets/top/img-top-hero.jpg'
+import heroImage from '@/shared/assets/top/img-top-hero.webp'
 import { Skeleton } from '@/shared/ui'
 
 export const TopHero = () => {

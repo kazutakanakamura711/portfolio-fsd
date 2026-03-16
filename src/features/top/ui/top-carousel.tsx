@@ -83,7 +83,7 @@ export const TopCarousel = ({ applications }: Props) => {
                       <Skeleton className="absolute inset-0 h-full w-full rounded-none" />
                     )}
                     <img
-                      src={application.thumbnail.url}
+                      src={`${application.thumbnail.url}?w=800&q=75&fm=webp`}
                       alt={application.title}
                       className={`h-full w-full object-cover transition-opacity duration-300 ${
                         loadedImages[application.id]
@@ -96,11 +96,13 @@ export const TopCarousel = ({ applications }: Props) => {
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-2 max-w-sm mx-auto">
-                  <CardTitle className="text-lg">{application.title}</CardTitle>
-                  <p className="text-sm text-muted-foreground">
+                  <CardTitle className="text-lg line-clamp-1">
+                    {application.title}
+                  </CardTitle>
+                  <p className="text-sm text-muted-foreground line-clamp-3">
                     {application.description}
                   </p>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-muted-foreground line-clamp-1">
                     {application.technologies}
                   </p>
                 </CardContent>

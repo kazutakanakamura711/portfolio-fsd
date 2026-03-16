@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import type { Applications } from '@/entities/microcms/applications'
-import applicationsImage from '@/shared/assets/top/img-top-applications.png'
+import applicationsImage from '@/shared/assets/top/img-top-applications.webp'
 import { Skeleton } from '@/shared/ui'
 import { TopCarousel } from './top-carousel'
 import { Title } from '@/shared/ui'
@@ -59,7 +59,9 @@ export const TopApplications = ({ applications, isLoading }: Props) => {
         </div>
       </div>
       {/* カルーセル */}
-      <TopCarousel applications={applications} />
+      <div className="max-w-3xl mx-auto w-full">
+        <TopCarousel applications={applications} />
+      </div>
     </section>
   )
 }
