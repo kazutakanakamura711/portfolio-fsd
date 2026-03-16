@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import galleryImage from '@/shared/assets/top/img-top-gallery.jpg'
+import galleryImage from '@/shared/assets/top/img-top-gallery.webp'
 import { Skeleton } from '@/shared/ui'
 
 export const TopGallery = () => {

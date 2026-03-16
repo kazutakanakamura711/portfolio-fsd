@@ -7,15 +7,31 @@ import { fileURLToPath } from 'node:url'
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin'
 import { playwright } from '@vitest/browser-playwright'
 import svgr from 'vite-plugin-svgr'
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
+import sitemap from 'vite-plugin-sitemap'
 
 const dirname =
   typeof __dirname !== 'undefined'
     ? __dirname
     : path.dirname(fileURLToPath(import.meta.url))
 
-// More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
-  plugins: [react(), tailwindcss(), svgr()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    svgr(),
+    // ビルド時に画像を圧縮してファイルサイズを削減する
+    ViteImageOptimizer({
+      png: { quality: 80 },
+      jpeg: { quality: 80 },
+      jpg: { quality: 80 },
+      webp: { quality: 80 },
+    }),
+    sitemap({
+      hostname: 'https://portfolio.sakura-kn.com',
+      dynamicRoutes: ['/', '/profile', '/applications', '/gallery'],
+    }),
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

@@ -1,4 +1,4 @@
-import profileImage from '@/shared/assets/img-profile.jpg'
+import profileImage from '@/shared/assets/img-profile.webp'
 
 export const ProfileHero = () => {
   return (
