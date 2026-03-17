@@ -67,7 +67,7 @@ export const TopCarousel = ({ applications }: Props) => {
   }, [api, count])
 
   return (
-    <>
+    <div className="flex flex-col gap-8">
       <Carousel
         setApi={setApi}
         opts={{ align: 'start', loop: true }}
@@ -111,6 +111,7 @@ export const TopCarousel = ({ applications }: Props) => {
                     href={application.url}
                     target="_blank"
                     rel="noreferrer"
+                    aria-label={`${application.title} App`}
                     className="flex items-center gap-1 text-sm hover:opacity-60 transition-opacity"
                   >
                     <ExternalLink size={14} />
@@ -120,6 +121,7 @@ export const TopCarousel = ({ applications }: Props) => {
                     href={application.github_url}
                     target="_blank"
                     rel="noreferrer"
+                    aria-label={`${application.title} GitHub`}
                     className="flex items-center gap-1 text-sm hover:opacity-60 transition-opacity"
                   >
                     <span>GitHub</span>
@@ -133,7 +135,7 @@ export const TopCarousel = ({ applications }: Props) => {
         <CarouselNext className="right-2" />
       </Carousel>
 
-      <div className="flex items-center justify-center gap-2">
+      <div className="flex items-center justify-center gap-6">
         {Array.from({ length: count }).map((_, index) => (
           <button
             key={index}
@@ -148,6 +150,6 @@ export const TopCarousel = ({ applications }: Props) => {
           />
         ))}
       </div>
-    </>
+    </div>
   )
 }
