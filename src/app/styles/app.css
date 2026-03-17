@@ -1,13 +1,20 @@
 body {
-  background-image: url('@/shared/assets/img-flower.png');
-  background-attachment: fixed;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: url('@/shared/assets/img-flower.webp');
   background-repeat: repeat;
   background-position: center;
   background-size: 20%;
 }
 
 @media (min-width: 768px) {
-  body {
+  body::before {
     background-size: 12.5%;
   }
 }

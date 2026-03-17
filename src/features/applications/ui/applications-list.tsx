@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import type { Applications } from '@/entities/microcms/applications'
+import { Skeleton } from '@/shared/ui'
 
 type Props = {
   applications: Applications[]
@@ -12,6 +14,7 @@ const ApplicationItem = ({
   index: number
 }) => {
   const isEven = index % 2 === 0
+  const [isLoaded, setIsLoaded] = useState(false)
 
   return (
     <article
@@ -20,11 +23,18 @@ const ApplicationItem = ({
       }`}
     >
       {/* 画像 */}
-      <div className="w-full md:w-1/2">
+      <div className="relative w-full md:w-1/2">
+        {!isLoaded && (
+          <Skeleton className="absolute inset-0 h-full w-full rounded-none" />
+        )}
         <img
-          src={application.thumbnail.url}
+          src={`${application.thumbnail.url}?w=800&q=75&fm=webp`}
           alt={application.title}
-          className="w-full h-auto object-cover"
+          className={`w-full h-auto object-cover transition-opacity duration-300 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+          onLoad={() => setIsLoaded(true)}
+          onError={() => setIsLoaded(true)}
         />
       </div>
 

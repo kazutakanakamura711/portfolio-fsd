@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import profileImage from '@/shared/assets/img-profile.jpg'
+import profileImage from '@/shared/assets/img-profile.webp'
 import { Skeleton } from '@/shared/ui'
 import { Title } from '@/shared/ui'
 

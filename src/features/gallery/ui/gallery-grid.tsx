@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { Dialog, DialogContent } from '@/shared/ui/shadcn/dialog'
+import { Skeleton } from '@/shared/ui'
 
-import img01 from '@/shared/assets/gallery/img-gallery-01.png'
-import img02 from '@/shared/assets/gallery/img-gallery-02.jpg'
-import img03 from '@/shared/assets/gallery/img-gallery-03.jpg'
-import img04 from '@/shared/assets/gallery/img-gallery-04.jpg'
-import img05 from '@/shared/assets/gallery/img-gallery-05.png'
+import img01 from '@/shared/assets/gallery/img-gallery-01.webp'
+import img02 from '@/shared/assets/gallery/img-gallery-02.webp'
+import img03 from '@/shared/assets/gallery/img-gallery-03.webp'
+import img04 from '@/shared/assets/gallery/img-gallery-04.webp'
+import img05 from '@/shared/assets/gallery/img-gallery-05.webp'
 
 const GALLERY_IMAGES = [
   { src: img01, alt: 'gallery-01' },
@@ -19,6 +20,11 @@ type GalleryImage = (typeof GALLERY_IMAGES)[number]
 
 export const GalleryGrid = () => {
   const [selected, setSelected] = useState<GalleryImage | null>(null)
+  const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({})
+
+  const handleImageLoaded = (alt: string) => {
+    setLoadedImages((previous) => ({ ...previous, [alt]: true }))
+  }
 
   return (
     <>
@@ -28,12 +34,19 @@ export const GalleryGrid = () => {
             key={image.alt}
             type="button"
             onClick={() => setSelected(image)}
-            className="overflow-hidden cursor-pointer"
+            className="relative overflow-hidden cursor-pointer aspect-square"
           >
+            {!loadedImages[image.alt] && (
+              <Skeleton className="absolute inset-0 h-full w-full rounded-none" />
+            )}
             <img
               src={image.src}
               alt={image.alt}
-              className="w-full aspect-square object-cover transition-transform duration-300 hover:scale-105"
+              className={`w-full h-full object-cover transition-all duration-300 hover:scale-105 ${
+                loadedImages[image.alt] ? 'opacity-100' : 'opacity-0'
+              }`}
+              onLoad={() => handleImageLoaded(image.alt)}
+              onError={() => handleImageLoaded(image.alt)}
             />
           </button>
         ))}
