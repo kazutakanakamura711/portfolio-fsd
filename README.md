@@ -149,3 +149,43 @@ src/entities/microcms/{name}/
 ```
 
 例えば `api-applications.json` を配置した場合、`Applications` 型が `src/entities/microcms/applications/` に生成されます。
+
+---
+
+## CI/CD
+
+`main` ブランチへ push／merge すると、GitHub Actions が自動でビルド・デプロイを実行します。
+
+### フロー
+
+```
+main ブランチへ push
+  └─ ① ユニットテスト実行（Vitest）
+  └─ ② 本番ビルド（vite build）
+  └─ ③ dist/ をロリポップへ FTPS 転送（差分のみ）
+```
+
+### 使用ツール
+
+| 用途           | Action                                                                               |
+| -------------- | ------------------------------------------------------------------------------------ |
+| デプロイ       | [SamKirkland/FTP-Deploy-Action](https://github.com/SamKirkland/FTP-Deploy-Action) v4 |
+| 通信プロトコル | FTPS（FTP over TLS）ポート 21                                                        |
+
+### GitHub Secrets の設定
+
+リポジトリの **Settings > Secrets and variables > Actions** に以下を登録してください。
+
+| Secret 名                      | 説明                                                          |
+| ------------------------------ | ------------------------------------------------------------- |
+| `FTP_SERVER`                   | ロリポップの FTP サーバーホスト（例: `ftp.lolipop.jp`）       |
+| `FTP_USERNAME`                 | ロリポップの FTP ユーザー名                                   |
+| `FTP_PASSWORD`                 | ロリポップの FTP パスワード                                   |
+| `FTP_REMOTE_DIR`               | サーバー上のデプロイ先パス（例: `/portfolio.sakura-kn.com/`） |
+| `VITE_MICROCMS_SERVICE_DOMAIN` | MicroCMS サービスドメイン                                     |
+| `VITE_MICROCMS_API_KEY`        | MicroCMS API キー                                             |
+
+### 注意
+
+- React Router を使った SPA のため、サーバー側に `.htaccess` を設置して全リクエストを `index.html` へリダイレクトする必要があります（ロリポップは Apache のため `.htaccess` が利用可能）。
+- 2 回目以降のデプロイは差分ファイルのみを転送するため高速です。ステートファイル `.ftp-deploy-sync-state.json` はサーバー上に保持されます。
