@@ -1,0 +1,60 @@
+name: Build & Deploy to Lolipop
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      # ─── ① チェックアウト ───────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ─── ② Node.js セットアップ ────────────────────────────────────
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # ─── ③ 依存関係インストール ────────────────────────────────────
+      - name: Install dependencies
+        run: npm ci
+
+      # ─── ④ テスト（unit のみ。storybookはブラウザ不要のため除外）──────
+      - name: Run unit tests
+        run: npx vitest run --project unit
+
+      # ─── ⑤ ビルド（環境変数は GitHub Secrets から注入） ──────────────
+      - name: Build
+        run: npm run build
+        env:
+          VITE_MICROCMS_SERVICE_DOMAIN: ${{ secrets.VITE_MICROCMS_SERVICE_DOMAIN }}
+          VITE_MICROCMS_API_KEY: ${{ secrets.VITE_MICROCMS_API_KEY }}
+
+      # ─── ⑥ FTP デプロイ（ロリポップ） ────────────────────────────────
+      # SamKirkland/FTP-Deploy-Action は差分のみを転送するため高速
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # ロリポップのデフォルトポート (FTPS: 21 / SFTP: 2222)
+          port: 21
+          protocol: ftps
+          local-dir: ./dist/
+          # ロリポップのWebルートパス（例: /www/ または独自ドメインの場合 /ドメイン名/）
+          # 実際のパスに合わせて変更してください
+          server-dir: ${{ secrets.FTP_REMOTE_DIR }}
+          # .ftpdeployなどのステートファイルを除外
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            .ftp-deploy-sync-state.json
