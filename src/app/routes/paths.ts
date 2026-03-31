@@ -3,6 +3,5 @@ export const PATHS = {
   PROFILE: '/profile',
   APPLICATIONS: '/applications',
   WORKS: '/works',
-  GALLERY: '/gallery',
   CONTACT: '/contact',
 } as const

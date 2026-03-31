@@ -38,7 +38,6 @@ describe('HeaderHamburger', () => {
     expect(screen.getByText('TOP')).toBeInTheDocument()
     expect(screen.getByText('PROFILE')).toBeInTheDocument()
     expect(screen.getByText('APPLICATIONS')).toBeInTheDocument()
-    expect(screen.getByText('GALLERY')).toBeInTheDocument()
   })
 
   it('メニュー項目をクリックするとonCloseが呼ばれる', async () => {
