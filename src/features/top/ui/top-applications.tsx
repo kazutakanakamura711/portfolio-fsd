@@ -51,9 +51,6 @@ export const TopApplications = ({ applications, isLoading }: Props) => {
         variants={fadeInUp}
         className="flex flex-col md:flex-row gap-8 items-center"
       >
-        <p className="w-full md:w-1/2 text-sm leading-relaxed">
-          実案件以外のアプリケーションです。ゲームやコピペコンポーネントなどを含みます。
-        </p>
         <div className="relative w-full md:w-1/2 overflow-hidden">
           {!isIntroImageLoaded && (
             <Skeleton className="w-full aspect-3/2 rounded-none" />
@@ -70,6 +67,9 @@ export const TopApplications = ({ applications, isLoading }: Props) => {
             onError={() => setIsIntroImageLoaded(true)}
           />
         </div>
+        <p className="w-full md:w-1/2 text-sm leading-relaxed">
+          実案件以外のアプリケーションです。ゲームやコピペコンポーネントなどを含みます。
+        </p>
       </motion.div>
       {/* カルーセル */}
       <motion.div variants={fadeInUp} className="max-w-3xl mx-auto w-full">

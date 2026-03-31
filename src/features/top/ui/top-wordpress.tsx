@@ -50,6 +50,10 @@ export const TopWordpress = ({ wordpresses, isLoading }: Props) => {
         variants={fadeInUp}
         className="flex flex-col md:flex-row gap-8 items-center"
       >
+        <p className="w-full md:w-1/2 text-sm leading-relaxed">
+          WordPressを使用した制作実績です。デザインカンプをもとに実装し、
+          運用しやすいWordPressテーマとして構築しています。
+        </p>
         <div className="relative w-full md:w-1/2 overflow-hidden">
           {!isIntroImageLoaded && (
             <Skeleton className="w-full aspect-3/2 rounded-none" />
@@ -66,10 +70,6 @@ export const TopWordpress = ({ wordpresses, isLoading }: Props) => {
             onError={() => setIsIntroImageLoaded(true)}
           />
         </div>
-        <p className="w-full md:w-1/2 text-sm leading-relaxed">
-          WordPressを使用した制作実績です。デザインカンプをもとに実装し、
-          運用しやすいWordPressテーマとして構築しています。
-        </p>
       </motion.div>
 
       <motion.div variants={fadeInUp} className="max-w-3xl mx-auto w-full">
