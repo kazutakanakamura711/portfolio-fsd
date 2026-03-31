@@ -1,6 +1,8 @@
+import { motion } from 'framer-motion'
 import { Heading, Title, Skeleton } from '@/shared/ui'
 import { ApplicationsList } from './ui'
 import { useApplications } from '@/shared/hooks'
+import { fadeInDown, fadeInUp, staggerContainer } from '@/shared/lib/animations'
 
 const ApplicationsSkeleton = () => (
   <div className="flex flex-col gap-8 animate-in fade-in duration-300">
@@ -27,13 +29,23 @@ export const ApplicationsContainer = () => {
   const { applications, isLoading } = useApplications()
 
   return (
-    <div className="flex flex-col gap-8">
-      <Title as={Heading.H1}>APPLICATIONS</Title>
-      {isLoading ? (
-        <ApplicationsSkeleton />
-      ) : (
-        <ApplicationsList applications={applications} />
-      )}
-    </div>
+    <motion.div
+      className="flex flex-col gap-8"
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+    >
+      <motion.div variants={fadeInDown} className="self-center">
+        <Title as={Heading.H1}>APPLICATIONS</Title>
+      </motion.div>
+      <motion.div variants={fadeInUp}>
+        {isLoading ? (
+          <ApplicationsSkeleton />
+        ) : (
+          <ApplicationsList applications={applications} />
+        )}
+      </motion.div>
+    </motion.div>
   )
 }
