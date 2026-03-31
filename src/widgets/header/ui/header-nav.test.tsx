@@ -15,8 +15,10 @@ describe('HeaderNav', () => {
     renderWithRouter()
     expect(screen.getByText('TOP')).toBeInTheDocument()
     expect(screen.getByText('PROFILE')).toBeInTheDocument()
+    expect(screen.getByText('WORKS')).toBeInTheDocument()
+    expect(screen.getByText('WORDPRESS')).toBeInTheDocument()
     expect(screen.getByText('APPLICATIONS')).toBeInTheDocument()
-    expect(screen.getByText('GALLERY')).toBeInTheDocument()
+    expect(screen.getByText('CONTACT')).toBeInTheDocument()
   })
 
   it('各項目がリンクになっている', () => {
@@ -29,13 +31,21 @@ describe('HeaderNav', () => {
       'href',
       '/profile'
     )
+    expect(screen.getByRole('link', { name: 'WORKS' })).toHaveAttribute(
+      'href',
+      '/works'
+    )
+    expect(screen.getByRole('link', { name: 'WORDPRESS' })).toHaveAttribute(
+      'href',
+      '/wordpress'
+    )
     expect(screen.getByRole('link', { name: 'APPLICATIONS' })).toHaveAttribute(
       'href',
       '/applications'
     )
-    expect(screen.getByRole('link', { name: 'GALLERY' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: 'CONTACT' })).toHaveAttribute(
       'href',
-      '/gallery'
+      '/contact'
     )
   })
 })
