@@ -2,6 +2,7 @@ import { useApplications } from '@/shared/hooks'
 import { TopHero, TopProfile } from './ui'
 import { TopApplications } from './ui/top-applications'
 import { TopGallery } from './ui/top-gallery'
+import { TopContact } from './ui/top-contact'
 
 export const TopContainer = () => {
   const { applications, isLoading } = useApplications()
@@ -12,6 +13,7 @@ export const TopContainer = () => {
       <TopProfile />
       <TopApplications applications={applications} isLoading={isLoading} />
       <TopGallery />
+      <TopContact />
     </div>
   )
 }

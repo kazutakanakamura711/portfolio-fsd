@@ -6,6 +6,7 @@ const NAV_ITEMS = [
   { label: 'PROFILE', path: PATHS.PROFILE },
   { label: 'APPLICATIONS', path: PATHS.APPLICATIONS },
   { label: 'GALLERY', path: PATHS.GALLERY },
+  { label: 'CONTACT', path: PATHS.CONTACT },
 ]
 
 export const HeaderNav = () => {

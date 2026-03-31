@@ -29,7 +29,7 @@ export default defineConfig({
     }),
     sitemap({
       hostname: 'https://portfolio.sakura-kn.com',
-      dynamicRoutes: ['/', '/profile', '/applications', '/gallery'],
+      dynamicRoutes: ['/', '/profile', '/applications', '/gallery', '/contact'],
     }),
   ],
   resolve: {

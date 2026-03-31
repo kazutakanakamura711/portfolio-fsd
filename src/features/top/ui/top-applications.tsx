@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 
 import type { Applications } from '@/entities/microcms/applications'
 import applicationsImage from '@/shared/assets/top/img-top-applications.webp'
+import { fadeInDown, fadeInUp, staggerContainer } from '@/shared/lib/animations'
 import { Skeleton } from '@/shared/ui'
 import { TopCarousel } from './top-carousel'
 import { Title } from '@/shared/ui'
@@ -33,11 +35,22 @@ export const TopApplications = ({ applications, isLoading }: Props) => {
   }
 
   return (
-    <section className="flex flex-col gap-16">
-      <Title>APPLICATIONS</Title>
+    <motion.section
+      className="flex flex-col gap-16"
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
+      <motion.div variants={fadeInDown} className="self-center">
+        <Title>APPLICATIONS</Title>
+      </motion.div>
 
       {/* テキスト＋画像 */}
-      <div className="flex flex-col md:flex-row gap-8 items-center">
+      <motion.div
+        variants={fadeInUp}
+        className="flex flex-col md:flex-row gap-8 items-center"
+      >
         <p className="w-full md:w-1/2 text-sm leading-relaxed">
           実案件以外のアプリケーションです。ゲームやコピペコンポーネントなどを含みます。
         </p>
@@ -57,11 +70,11 @@ export const TopApplications = ({ applications, isLoading }: Props) => {
             onError={() => setIsIntroImageLoaded(true)}
           />
         </div>
-      </div>
+      </motion.div>
       {/* カルーセル */}
-      <div className="max-w-3xl mx-auto w-full">
+      <motion.div variants={fadeInUp} className="max-w-3xl mx-auto w-full">
         <TopCarousel applications={applications} />
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   )
 }
