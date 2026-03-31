@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion'
-import { Heading, Skeleton, Title } from '@/shared/ui'
-import { useWorks } from '@/shared/hooks'
+import { Heading, Title, Skeleton } from '@/shared/ui'
+import { useWordpress } from '@/shared/hooks'
 import { fadeInDown, fadeInUp, staggerContainer } from '@/shared/lib/animations'
-import { WorksList } from './ui'
+import { WordpressList } from './ui'
 
-const WorksSkeleton = () => (
+const WordpressSkeleton = () => (
   <div className="flex flex-col gap-8 animate-in fade-in duration-300">
     {Array.from({ length: 3 }).map((_, i) => (
       <div
@@ -30,8 +30,8 @@ const WorksSkeleton = () => (
   </div>
 )
 
-export const WorksContainer = () => {
-  const { works, isLoading } = useWorks()
+export const WordpressContainer = () => {
+  const { wordpresses, isLoading } = useWordpress()
 
   return (
     <motion.div
@@ -42,10 +42,14 @@ export const WorksContainer = () => {
       viewport={{ once: true, amount: 0.1 }}
     >
       <motion.div variants={fadeInDown} className="self-center">
-        <Title as={Heading.H1}>WORKS</Title>
+        <Title as={Heading.H1}>WORDPRESS</Title>
       </motion.div>
       <motion.div variants={fadeInUp}>
-        {isLoading ? <WorksSkeleton /> : <WorksList works={works} />}
+        {isLoading ? (
+          <WordpressSkeleton />
+        ) : (
+          <WordpressList wordpresses={wordpresses} />
+        )}
       </motion.div>
     </motion.div>
   )

@@ -3,6 +3,7 @@ import { PATHS } from './paths'
 import { TopPage } from '@/pages/top'
 import { ApplicationsPage } from '@/pages/applications'
 import { WorksPage } from '@/pages/works'
+import { WordpressPage } from '@/pages/wordpress'
 import { NotFoundPage } from '@/pages/not-found'
 import { ContactPage } from '@/pages/contact'
 
@@ -22,6 +23,10 @@ export const routes = [
   {
     path: PATHS.WORKS,
     element: <WorksPage />,
+  },
+  {
+    path: PATHS.WORDPRESS,
+    element: <WordpressPage />,
   },
   {
     path: PATHS.CONTACT,

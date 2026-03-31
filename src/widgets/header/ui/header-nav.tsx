@@ -4,8 +4,9 @@ import { PATHS } from '@/app/routes/paths'
 const NAV_ITEMS = [
   { label: 'TOP', path: PATHS.TOP },
   { label: 'PROFILE', path: PATHS.PROFILE },
-  { label: 'APPLICATIONS', path: PATHS.APPLICATIONS },
   { label: 'WORKS', path: PATHS.WORKS },
+  { label: 'WORDPRESS', path: PATHS.WORDPRESS },
+  { label: 'APPLICATIONS', path: PATHS.APPLICATIONS },
   { label: 'CONTACT', path: PATHS.CONTACT },
 ]
 
