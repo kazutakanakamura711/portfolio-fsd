@@ -1,18 +1,33 @@
 import { useState } from 'react'
+import { motion } from 'framer-motion'
+
 import galleryImage from '@/shared/assets/top/img-top-gallery.webp'
+import { fadeInDown, fadeInUp, staggerContainer } from '@/shared/lib/animations'
 import { Skeleton } from '@/shared/ui'
 
 export const TopGallery = () => {
   const [isImageLoaded, setIsImageLoaded] = useState(false)
 
   return (
-    <section className="flex flex-col gap-8">
-      <h2 className="text-2xl font-medium tracking-super-wide text-center">
+    <motion.section
+      className="flex flex-col gap-8"
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
+      <motion.h2
+        variants={fadeInDown}
+        className="text-2xl font-medium tracking-super-wide text-center"
+      >
         GALLERY
-      </h2>
+      </motion.h2>
 
       {/* 画像＋テキスト（左に画像・右にテキスト） */}
-      <div className="flex flex-col md:flex-row gap-8 items-center">
+      <motion.div
+        variants={fadeInUp}
+        className="flex flex-col md:flex-row gap-8 items-center"
+      >
         <div className="relative w-full md:w-1/2 overflow-hidden">
           {!isImageLoaded && (
             <Skeleton className="w-full aspect-3/2 rounded-none" />
@@ -33,7 +48,7 @@ export const TopGallery = () => {
           趣味で制作したPhotoshopの画像作品集です。
           写真のコラージュを中心に制作しています。
         </p>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   )
 }

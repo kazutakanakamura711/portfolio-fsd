@@ -2,8 +2,10 @@ import { ProfilePage } from '@/pages/profile'
 import { PATHS } from './paths'
 import { TopPage } from '@/pages/top'
 import { ApplicationsPage } from '@/pages/applications'
-import { GalleryPage } from '@/pages/gallery'
+import { WorksPage } from '@/pages/works'
+import { WordpressPage } from '@/pages/wordpress'
 import { NotFoundPage } from '@/pages/not-found'
+import { ContactPage } from '@/pages/contact'
 
 export const routes = [
   {
@@ -19,8 +21,16 @@ export const routes = [
     element: <ApplicationsPage />,
   },
   {
-    path: PATHS.GALLERY,
-    element: <GalleryPage />,
+    path: PATHS.WORKS,
+    element: <WorksPage />,
+  },
+  {
+    path: PATHS.WORDPRESS,
+    element: <WordpressPage />,
+  },
+  {
+    path: PATHS.CONTACT,
+    element: <ContactPage />,
   },
   {
     path: '*',

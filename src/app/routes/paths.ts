@@ -2,5 +2,7 @@ export const PATHS = {
   TOP: '/',
   PROFILE: '/profile',
   APPLICATIONS: '/applications',
-  GALLERY: '/gallery',
+  WORKS: '/works',
+  WORDPRESS: '/wordpress',
+  CONTACT: '/contact',
 } as const

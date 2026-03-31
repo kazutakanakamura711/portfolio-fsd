@@ -4,14 +4,16 @@ import { PATHS } from '@/app/routes/paths'
 const NAV_ITEMS = [
   { label: 'TOP', path: PATHS.TOP },
   { label: 'PROFILE', path: PATHS.PROFILE },
+  { label: 'WORKS', path: PATHS.WORKS },
+  { label: 'WORDPRESS', path: PATHS.WORDPRESS },
   { label: 'APPLICATIONS', path: PATHS.APPLICATIONS },
-  { label: 'GALLERY', path: PATHS.GALLERY },
+  { label: 'CONTACT', path: PATHS.CONTACT },
 ]
 
 export const HeaderNav = () => {
   return (
     <nav>
-      <ul className="flex gap-8">
+      <ul className="flex gap-6">
         {NAV_ITEMS.map((item) => (
           <li key={item.path} className="group">
             <NavLink

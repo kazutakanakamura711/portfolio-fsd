@@ -2,7 +2,7 @@ body {
   position: relative;
 }
 
-body::before {
+/* body::before {
   content: '';
   position: fixed;
   inset: 0;
@@ -11,7 +11,7 @@ body::before {
   background-repeat: repeat;
   background-position: center;
   background-size: 20%;
-}
+} */
 
 @media (min-width: 768px) {
   body::before {
