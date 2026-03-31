@@ -1,11 +1,14 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import heroImage from '@/shared/assets/top/img-top-hero.webp'
+import { PATHS } from '@/app/routes/paths'
 import { Button } from '@/shared/ui'
 import { Skeleton } from '@/shared/ui'
 
 export const TopHero = () => {
   const [isLoaded, setIsLoaded] = useState(false)
+  const navigate = useNavigate()
 
   return (
     <section className="w-full">
@@ -63,6 +66,7 @@ export const TopHero = () => {
               <Button
                 type="button"
                 variant="outline"
+                onClick={() => navigate(PATHS.WORKS)}
                 className="h-10 flex-1 min-w-0 border-white bg-transparent px-3 text-sm text-white hover:bg-white/10 hover:text-white hover:scale-105 active:scale-95 transition-transform duration-200 sm:h-11 sm:min-w-40 sm:px-6"
               >
                 実績を見る

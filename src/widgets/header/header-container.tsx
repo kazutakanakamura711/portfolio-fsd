@@ -13,7 +13,7 @@ export const HeaderContainer = () => {
       transition={{ duration: 0.6, ease: 'easeOut' as const }}
       className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b"
     >
-      <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
+      <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-4 md:px-8">
         {/* ロゴ */}
         <div className="flex items-center gap-2">
           {/* SVGをここに配置 */}
