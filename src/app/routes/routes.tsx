@@ -4,6 +4,7 @@ import { TopPage } from '@/pages/top'
 import { ApplicationsPage } from '@/pages/applications'
 import { GalleryPage } from '@/pages/gallery'
 import { NotFoundPage } from '@/pages/not-found'
+import { ContactPage } from '@/pages/contact'
 
 export const routes = [
   {
@@ -21,6 +22,10 @@ export const routes = [
   {
     path: PATHS.GALLERY,
     element: <GalleryPage />,
+  },
+  {
+    path: PATHS.CONTACT,
+    element: <ContactPage />,
   },
   {
     path: '*',

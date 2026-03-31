@@ -15,6 +15,7 @@ React + TypeScript + Vite をベースに、Feature-Sliced Design（FSD）アー
 | `/profile`      | PROFILE — 経歴・スキル詳細                                             |
 | `/applications` | APPLICATIONS — 制作したアプリの一覧（MicroCMS から取得）               |
 | `/gallery`      | GALLERY — 写真ギャラリー                                               |
+| `/contact`      | CONTACT — お問い合わせフォーム（EmailJS 送信）                         |
 
 ---
 
@@ -27,6 +28,7 @@ React + TypeScript + Vite をベースに、Feature-Sliced Design（FSD）アー
 - **Tailwind CSS v4** + shadcn/ui + Radix UI
 - **React Router v7**
 - **Embla Carousel**
+- **EmailJS**（お問い合わせメール送信）
 
 ### CMS
 
@@ -53,7 +55,7 @@ React + TypeScript + Vite をベースに、Feature-Sliced Design（FSD）アー
 ```ts
 sitemap({
   hostname: 'https://portfolio.sakura-kn.com',
-  dynamicRoutes: ['/', '/profile', '/applications', '/gallery', '/new-page'],
+  dynamicRoutes: ['/', '/profile', '/applications', '/gallery', '/contact', '/new-page'],
 }),
 ```
 
@@ -84,6 +86,8 @@ npm install
 # 環境変数の設定
 cp .env.example .env.local
 # VITE_MICROCMS_SERVICE_DOMAIN と VITE_MICROCMS_API_KEY を設定
+# さらに Contact フォームを使う場合は
+# VITE_EMAILJS_SERVICE_ID / VITE_EMAILJS_TEMPLATE_ID / VITE_EMAILJS_PUBLIC_KEY を設定
 ```
 
 ---
