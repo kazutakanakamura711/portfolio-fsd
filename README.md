@@ -83,12 +83,17 @@ src/
 # 依存パッケージのインストール
 npm install
 
-# 環境変数の設定
+# 開発用の環境変数を設定
 cp .env.example .env.local
 # VITE_MICROCMS_SERVICE_DOMAIN と VITE_MICROCMS_API_KEY を設定
 # さらに Contact フォームを使う場合は
 # VITE_EMAILJS_SERVICE_ID / VITE_EMAILJS_TEMPLATE_ID / VITE_EMAILJS_PUBLIC_KEY を設定
 ```
+
+- `npm run dev` では `.env.local` を参照します。
+- ローカルで `npm run build` を実行する場合は `.env.production` を参照します。
+- GitHub Actions 上の `npm run build` では `.env.production` ではなく GitHub Secrets を参照します。
+- `VITE_CONTACT_TO_EMAIL` は任意です。EmailJS のテンプレート側で送信先が固定されている場合は空でも動作します。
 
 ---
 
@@ -188,6 +193,12 @@ main ブランチへ push
 | `FTP_REMOTE_DIR`               | サーバー上のデプロイ先パス（例: `/portfolio.sakura-kn.com/`） |
 | `VITE_MICROCMS_SERVICE_DOMAIN` | MicroCMS サービスドメイン                                     |
 | `VITE_MICROCMS_API_KEY`        | MicroCMS API キー                                             |
+| `VITE_EMAILJS_SERVICE_ID`      | EmailJS の Service ID                                         |
+| `VITE_EMAILJS_TEMPLATE_ID`     | EmailJS の Template ID                                        |
+| `VITE_EMAILJS_PUBLIC_KEY`      | EmailJS の Public Key                                         |
+| `VITE_CONTACT_TO_EMAIL`        | 送信先メールアドレス（任意。テンプレート側で固定なら不要）    |
+
+GitHub Actions で本番ビルドする場合、これらの値は `.env.production` ではなく GitHub Secrets から注入されます。
 
 ### 注意
 
