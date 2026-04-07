@@ -1,11 +1,12 @@
-import { useMemo, useState } from 'react'
-import type { FormEvent } from 'react'
+import { useMemo, useState, type ComponentProps } from 'react'
 import emailjs from '@emailjs/browser'
 import {
   contactFormSchema,
   initialContactFormState,
   type ContactFormState,
 } from './schema/contact-form-schema'
+
+type ContactFormSubmitHandler = NonNullable<ComponentProps<'form'>['onSubmit']>
 
 export const useContactForm = () => {
   const [form, setForm] = useState<ContactFormState>(initialContactFormState)
@@ -37,7 +38,7 @@ export const useContactForm = () => {
     setSuccessMessage('')
   }
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit: ContactFormSubmitHandler = async (event) => {
     event.preventDefault()
     resetStatus()
 
