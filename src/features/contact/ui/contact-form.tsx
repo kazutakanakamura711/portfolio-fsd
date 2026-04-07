@@ -1,5 +1,9 @@
+import type { ComponentProps } from 'react'
+
 import { Button } from '@/shared/ui'
 import type { ContactFormState } from '../model'
+
+type ContactFormSubmitHandler = NonNullable<ComponentProps<'form'>['onSubmit']>
 
 type Props = {
   form: ContactFormState
@@ -8,7 +12,7 @@ type Props = {
   successMessage: string
   isEmailjsConfigured: boolean
   setField: (field: keyof ContactFormState, value: string) => void
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
+  onSubmit: ContactFormSubmitHandler
 }
 
 export const ContactForm = ({
@@ -112,8 +116,7 @@ export const ContactForm = ({
 
       {!isEmailjsConfigured ? (
         <p className="text-xs text-muted-foreground">
-          環境変数が未設定のため送信できません。`.env.local`
-          を設定してください。
+          現在、お問い合わせフォームはご利用いただけません。
         </p>
       ) : null}
     </form>
