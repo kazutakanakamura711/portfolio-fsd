@@ -1,8 +1,13 @@
 import { useState } from 'react'
-import profileImage from '@/shared/assets/img-profile.webp'
+import type { MicroCMSImage } from 'microcms-js-sdk'
 import { Skeleton } from '@/shared/ui'
 
-export const ProfileHero = () => {
+type Props = {
+  image: MicroCMSImage
+  name: string
+}
+
+export const ProfileHero = ({ image, name }: Props) => {
   const [isLoaded, setIsLoaded] = useState(false)
 
   return (
@@ -12,8 +17,8 @@ export const ProfileHero = () => {
           <Skeleton className="absolute inset-0 h-full w-full rounded-none" />
         )}
         <img
-          src={profileImage}
-          alt="Kazutaka Nakamura"
+          src={`${image.url}?w=600&q=75&fm=webp`}
+          alt={name}
           className={`w-full object-cover transition-opacity duration-300 ${
             isLoaded ? 'opacity-100' : 'opacity-0'
           }`}
@@ -22,7 +27,7 @@ export const ProfileHero = () => {
         />
       </div>
       <div className="flex flex-col items-center gap-1">
-        <p className="font-medium tracking-widest">KAZUTAKA NAKAMURA</p>
+        <p className="font-medium tracking-widest">{name.toUpperCase()}</p>
         <p className="text-sm text-muted-foreground tracking-wider">
           フロントエンドエンジニア
         </p>
