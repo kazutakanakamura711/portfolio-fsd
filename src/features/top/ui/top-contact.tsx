@@ -37,7 +37,10 @@ export const TopContact = () => {
       </motion.p>
 
       <motion.div variants={fadeInUp} className="flex justify-center">
-        <Button onClick={handleContact} className="px-8 py-3 rounded-full">
+        <Button
+          onClick={handleContact}
+          className="rounded-full px-8 py-3 bg-white text-[#333333] hover:bg-white/90 hover:scale-105 active:scale-95 transition-transform duration-200"
+        >
           お問い合わせ
         </Button>
       </motion.div>

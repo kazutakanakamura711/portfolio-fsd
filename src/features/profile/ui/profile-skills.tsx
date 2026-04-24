@@ -45,7 +45,7 @@ export const ProfileSkills = (props: Props) => {
   )
 
   return (
-    <div className="flex flex-col gap-4 border-t pt-8">
+    <div className="flex flex-col gap-4 border-t border-white/20 pt-8">
       <h2 className="font-medium tracking-wider">スキルセット</h2>
       <ul className="flex flex-col gap-3">
         {skills.map((skill) => (
@@ -55,7 +55,7 @@ export const ProfileSkills = (props: Props) => {
               {splitSkillValues(skill.value).map((tag) => (
                 <span
                   key={`${skill.label}-${tag}`}
-                  className="inline-flex items-center rounded-full border border-black/20 px-3 py-1 text-xs tracking-wide"
+                  className="inline-flex items-center rounded-full border border-white/30 px-3 py-1 text-xs tracking-wide"
                 >
                   {tag}
                 </span>
