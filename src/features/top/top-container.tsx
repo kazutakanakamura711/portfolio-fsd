@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { NavLink } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
@@ -149,9 +149,17 @@ const NAV_ITEMS = [
 export const TopContainer = () => {
   const [bgColor, setBgColor] = useState('pink')
   const [menuOpen, setMenuOpen] = useState(false)
+  const [hasScrolled, setHasScrolled] = useState(false)
+  const scrollRef = useRef<HTMLDivElement>(null)
   const { applications, isLoading } = useApplications()
   const { works, isLoading: isWorksLoading } = useWorks()
   const { wordpresses, isLoading: isWordpressLoading } = useWordpress()
+
+  const handleScroll = useCallback(() => {
+    if (!hasScrolled && scrollRef.current && scrollRef.current.scrollTop > 20) {
+      setHasScrolled(true)
+    }
+  }, [hasScrolled])
 
   return (
     <div
@@ -237,8 +245,33 @@ export const TopContainer = () => {
           <TopHero onColorChange={setBgColor} />
         </div>
 
+        {/* スクロール促しインジケーター */}
+        <motion.div
+          className="pointer-events-none absolute bottom-20 left-1/2 z-30 flex -translate-x-1/2 flex-col items-center text-slate-500"
+          animate={{ y: [0, -8, 0], opacity: hasScrolled ? 0 : 1 }}
+          transition={{
+            y: {
+              duration: 2.0,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              repeatType: 'loop',
+            },
+            opacity: { duration: 0.5, ease: 'easeOut' },
+          }}
+          aria-hidden="true"
+        >
+          <span className="text-[11px] font-medium uppercase tracking-[0.35em]">
+            scroll
+          </span>
+          <span className="mt-1 text-lg leading-none">↓</span>
+        </motion.div>
+
         {/* スクロールコンテンツ（Canvas の上を流れる） */}
-        <div className="absolute inset-0 z-10 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div
+          ref={scrollRef}
+          onScroll={handleScroll}
+          className="absolute inset-0 z-10 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
           {/* 透明スペーサー：最初の1画面は Canvas を見せる */}
           <div className="h-full w-full shrink-0" />
 
