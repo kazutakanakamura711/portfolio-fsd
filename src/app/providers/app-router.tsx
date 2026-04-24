@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { BrowserRouter, useLocation, useRoutes } from 'react-router-dom'
 import { routes } from '@/app/routes'
-import { PATHS } from '@/app/routes/paths'
 
 declare const gtag: (...args: unknown[]) => void
 

@@ -16,12 +16,10 @@ const splitTechnologies = (technologies: string): string[] => {
 
 const WordpressItem = ({
   wordpress,
-  index,
 }: {
   wordpress: Wordpress
   index: number
 }) => {
-  const isEven = index % 2 === 0
   const [isLoaded, setIsLoaded] = useState(false)
   const techTags = splitTechnologies(wordpress.technologies)
 
