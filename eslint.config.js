@@ -69,6 +69,33 @@ export default [
       'react/react-in-jsx-scope': 'off', // React 17+ では不要
       'react/prop-types': 'off', // TypeScript を使用しているため
       'react/display-name': 'off',
+      // Three.js JSX 属性（args, position, side, transparent 等）を許可
+      'react/no-unknown-property': [
+        'error',
+        {
+          ignore: [
+            'args',
+            'position',
+            'rotation',
+            'scale',
+            'side',
+            'transparent',
+            'opacity',
+            'color',
+            'intensity',
+            'metalness',
+            'roughness',
+            'attach',
+            'object',
+            'geometry',
+            'material',
+            'castShadow',
+            'receiveShadow',
+            'lineHeight',
+            'letterSpacing',
+          ],
+        },
+      ],
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },

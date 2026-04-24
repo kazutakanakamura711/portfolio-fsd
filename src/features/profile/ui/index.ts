@@ -1,4 +1,5 @@
 export { ProfileHero } from './profile-hero'
 export { ProfileCareer } from './profile-career'
+export { ProfileTimeline } from './profile-timeline'
 export { ProfileSkills } from './profile-skills'
 export { ProfileSns } from './profile-sns'

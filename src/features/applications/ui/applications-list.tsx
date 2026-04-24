@@ -17,13 +17,9 @@ const ApplicationItem = ({
   const [isLoaded, setIsLoaded] = useState(false)
 
   return (
-    <article
-      className={`flex flex-col md:flex-row gap-8 items-start border-t pt-8 ${
-        isEven ? '' : 'md:flex-row-reverse'
-      }`}
-    >
+    <article className="flex flex-col gap-8 items-start border-t border-white/20 pt-8">
       {/* 画像 */}
-      <div className="relative w-full md:w-1/2">
+      <div className="relative w-full overflow-hidden rounded-xl">
         {!isLoaded && (
           <Skeleton className="absolute inset-0 h-full w-full rounded-none" />
         )}
@@ -39,7 +35,7 @@ const ApplicationItem = ({
       </div>
 
       {/* テキスト */}
-      <div className="w-full md:w-1/2 flex flex-col gap-4 bg-white/80 p-6">
+      <div className="w-full flex flex-col gap-4 bg-white/10 p-6 rounded-xl">
         <h2 className="text-xl font-medium tracking-wider">
           {application.title}
         </h2>

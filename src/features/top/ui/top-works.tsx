@@ -48,9 +48,9 @@ export const TopWorks = ({ works, isLoading }: Props) => {
 
       <motion.div
         variants={fadeInUp}
-        className="flex flex-col md:flex-row gap-8 items-center"
+        className="flex flex-col gap-8 items-center"
       >
-        <div className="relative w-full md:w-1/2 overflow-hidden">
+        <div className="relative w-full overflow-hidden rounded-xl">
           {!isIntroImageLoaded && (
             <Skeleton className="w-full aspect-3/2 rounded-none" />
           )}
@@ -66,13 +66,13 @@ export const TopWorks = ({ works, isLoading }: Props) => {
             onError={() => setIsIntroImageLoaded(true)}
           />
         </div>
-        <p className="w-full md:w-1/2 text-sm leading-relaxed">
+        <p className="w-full text-sm leading-relaxed">
           実案件として制作したWebサイトやLPの実績です。企画意図や導線設計を踏まえつつ、
           デザインを忠実に再現し、運用しやすいフロントエンドとして構築しています。
         </p>
       </motion.div>
 
-      <motion.div variants={fadeInUp} className="max-w-3xl mx-auto w-full">
+      <motion.div variants={fadeInUp} className="w-full">
         <TopWorksCarousel works={works} />
       </motion.div>
     </motion.section>

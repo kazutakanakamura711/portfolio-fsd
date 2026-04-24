@@ -20,12 +20,8 @@ const WorkItem = ({ work, index }: { work: Works; index: number }) => {
   const techTags = splitTechnologies(work.technologies)
 
   return (
-    <article
-      className={`flex flex-col md:flex-row gap-8 items-start border-t pt-8 ${
-        isEven ? '' : 'md:flex-row-reverse'
-      }`}
-    >
-      <div className="relative w-full md:w-1/2">
+    <article className="flex flex-col gap-8 items-start border-t border-white/20 pt-8">
+      <div className="relative w-full overflow-hidden rounded-xl">
         {!isLoaded && (
           <Skeleton className="absolute inset-0 h-full w-full rounded-none" />
         )}
@@ -40,7 +36,7 @@ const WorkItem = ({ work, index }: { work: Works; index: number }) => {
         />
       </div>
 
-      <div className="w-full md:w-1/2 flex flex-col gap-4 bg-white/80 p-6">
+      <div className="w-full flex flex-col gap-4 bg-white/10 p-6 rounded-xl">
         <h2 className="text-xl font-medium tracking-wider">{work.title}</h2>
         <p className="text-sm leading-relaxed">{work.description}</p>
 
@@ -48,7 +44,7 @@ const WorkItem = ({ work, index }: { work: Works; index: number }) => {
           {techTags.map((tag) => (
             <span
               key={`${work.id}-${tag}`}
-              className="inline-flex items-center rounded-full border border-black/20 px-3 py-1 text-xs tracking-wide"
+              className="inline-flex items-center rounded-full border border-white/30 px-3 py-1 text-xs tracking-wide"
             >
               {tag}
             </span>

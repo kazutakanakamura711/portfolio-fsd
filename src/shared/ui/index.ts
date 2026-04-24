@@ -1,6 +1,7 @@
 export { Title, Heading, AlignSelf } from './title'
 export { Skeleton } from './shadcn/skeleton'
 export { Button } from './shadcn/button'
+export { PageShell, MarqueeBackground } from './page-shell'
 export {
   Card,
   CardContent,

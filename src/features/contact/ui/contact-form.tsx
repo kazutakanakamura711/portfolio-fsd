@@ -108,7 +108,7 @@ export const ContactForm = ({
 
       <Button
         type="submit"
-        className="h-11 w-full transition-transform duration-200 hover:scale-105 active:scale-95"
+        className="w-full rounded-full px-8 py-3 bg-white text-[#333333] hover:bg-white/90 hover:scale-105 active:scale-95 transition-transform duration-200"
         disabled={isSending || !isEmailjsConfigured}
       >
         {isSending ? '送信中...' : '送信する'}

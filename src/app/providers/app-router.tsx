@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
 import { BrowserRouter, useLocation, useRoutes } from 'react-router-dom'
 import { routes } from '@/app/routes'
-import { HeaderContainer } from '@/widgets/header'
-import { FooterContainer } from '@/widgets/footer'
+import { PATHS } from '@/app/routes/paths'
 
 declare const gtag: (...args: unknown[]) => void
 
@@ -18,13 +17,8 @@ const AppRoutes = () => {
     })
   }, [location])
 
-  return (
-    <>
-      <HeaderContainer />
-      <main className="max-w-6xl mx-auto px-4 py-20 md:px-8">{element}</main>
-      <FooterContainer />
-    </>
-  )
+  // 全ページ PageShell 内で独自レイアウトを持つため wrapper なし
+  return <>{element}</>
 }
 
 export const AppRouter = () => {
