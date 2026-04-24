@@ -131,8 +131,8 @@ export const TopCarousel = ({ applications }: Props) => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="left-2" />
-        <CarouselNext className="right-2" />
+        <CarouselPrevious className="left-2 border-[#333333] text-[#333333] hover:bg-[#333333]/10 hover:text-[#333333]" />
+        <CarouselNext className="right-2 border-[#333333] text-[#333333] hover:bg-[#333333]/10 hover:text-[#333333]" />
       </Carousel>
 
       <div className="flex items-center justify-center gap-6">
@@ -144,8 +144,8 @@ export const TopCarousel = ({ applications }: Props) => {
             aria-label={`Go to slide ${index + 1}`}
             className={
               index === current
-                ? 'h-2 w-2 rounded-full bg-foreground'
-                : 'h-2 w-2 rounded-full bg-muted-foreground/40'
+                ? 'h-2 w-2 rounded-full bg-white'
+                : 'h-2 w-2 rounded-full bg-white/30'
             }
           />
         ))}

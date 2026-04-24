@@ -12,7 +12,7 @@ export const ProfileHero = ({ image, name }: Props) => {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <div className="relative w-full max-w-sm">
+      <div className="relative w-full max-w-sm overflow-hidden rounded-xl">
         {!isLoaded && (
           <Skeleton className="absolute inset-0 h-full w-full rounded-none" />
         )}

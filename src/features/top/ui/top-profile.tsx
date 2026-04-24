@@ -25,7 +25,7 @@ export const TopProfile = () => {
       {/* プロフィール画像 */}
       <motion.div
         variants={fadeInUp}
-        className="relative w-40 h-40 overflow-hidden"
+        className="relative w-40 h-40 overflow-hidden rounded-2xl"
       >
         {!isLoaded && <Skeleton className="w-40 h-40 rounded-none" />}
         <img

@@ -1,5 +1,8 @@
 /// <reference types="vite/client" />
 /// <reference types="vite-plugin-svgr/client" />
+/// <reference types="@react-three/fiber" />
+
+import '@react-three/fiber'
 
 interface ImportMetaEnv {
   readonly VITE_MICROCMS_SERVICE_DOMAIN: string

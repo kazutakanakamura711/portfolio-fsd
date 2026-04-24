@@ -1,0 +1,1 @@
+{"apiFields":[{"fieldId":"period","name":"period","kind":"text","required":true},{"fieldId":"title","name":"title","kind":"text","required":true},{"fieldId":"description","name":"description","kind":"textArea","required":true}],"customFields":[]}

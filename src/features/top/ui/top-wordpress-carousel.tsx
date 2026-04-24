@@ -140,8 +140,8 @@ export const TopWordpressCarousel = ({ wordpresses }: Props) => {
             )
           })}
         </CarouselContent>
-        <CarouselPrevious className="left-2" />
-        <CarouselNext className="right-2" />
+        <CarouselPrevious className="left-2 border-[#333333] text-[#333333] hover:bg-[#333333]/10 hover:text-[#333333]" />
+        <CarouselNext className="right-2 border-[#333333] text-[#333333] hover:bg-[#333333]/10 hover:text-[#333333]" />
       </Carousel>
 
       <div className="flex items-center justify-center gap-6">
@@ -151,7 +151,7 @@ export const TopWordpressCarousel = ({ wordpresses }: Props) => {
             type="button"
             onClick={() => api?.scrollTo(index)}
             className={`h-2 w-2 rounded-full transition-colors ${
-              current === index ? 'bg-foreground' : 'bg-foreground/30'
+              current === index ? 'bg-white' : 'bg-white/30'
             }`}
             aria-label={`スライド ${index + 1} へ移動`}
           />
