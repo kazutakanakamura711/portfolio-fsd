@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { useApplications, useWorks, useWordpress } from '@/shared/hooks'
@@ -116,8 +116,6 @@ const HeroWave = () => {
 }
 
 const HeroCaption = ({ bgColor: _bgColor }: { bgColor: string }) => {
-  const navigate = useNavigate()
-
   return (
     <div className="flex w-full flex-col items-center gap-3 px-6 py-6 text-center">
       <motion.div

@@ -14,8 +14,7 @@ const splitTechnologies = (technologies: string): string[] => {
     .filter(Boolean)
 }
 
-const WorkItem = ({ work, index }: { work: Works; index: number }) => {
-  const isEven = index % 2 === 0
+const WorkItem = ({ work }: { work: Works; index: number }) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const techTags = splitTechnologies(work.technologies)
 

@@ -8,12 +8,10 @@ type Props = {
 
 const ApplicationItem = ({
   application,
-  index,
 }: {
   application: Applications
   index: number
 }) => {
-  const isEven = index % 2 === 0
   const [isLoaded, setIsLoaded] = useState(false)
 
   return (

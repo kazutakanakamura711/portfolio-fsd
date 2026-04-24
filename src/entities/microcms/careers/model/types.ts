@@ -5,7 +5,7 @@
  * 生成元: cms-schemas/list-type/api-careers.json
  */
 
-import type { MicroCMSImage, MicroCMSListContent } from 'microcms-js-sdk'
+import type { MicroCMSListContent } from 'microcms-js-sdk'
 
 export type Careers = MicroCMSListContent & {
   period: string
