@@ -167,7 +167,9 @@ export const TopContainer = () => {
       style={{ backgroundColor: BG_COLORS[bgColor] }}
     >
       {/* マーキー背景（PCのみ表示） */}
-      <MarqueeBackground />
+      <MarqueeBackground
+        theme={bgColor as 'pink' | 'green' | 'orange' | 'white'}
+      />
 
       {/* スマホフレーム：mobile=フル画面 / md+=電話型枠 */}
       <div
