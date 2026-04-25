@@ -44,6 +44,16 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+    watch: {
+      ignored: [
+        '**/coverage/**',
+        '**/dist/**',
+        '**/storybook-static/**',
+        '**/.turbo/**',
+      ],
+    },
+  },
   test: {
     projects: [
       // ① 通常のユニットテスト（Vitest + RTL）
