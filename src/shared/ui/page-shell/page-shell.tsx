@@ -10,6 +10,34 @@ const BG_COLORS: Record<string, string> = {
   orange: '#ffe8cc',
   white: '#f8fafc',
 }
+export type MarqueeTheme = keyof typeof BG_COLORS
+
+const MARQUEE_THEME_STYLES: Record<
+  MarqueeTheme,
+  { color: string; shadowDark: string; shadowLight: string }
+> = {
+  pink: {
+    color: '#ffeef7',
+    shadowDark: '#986678',
+    shadowLight: '#fff9fc',
+  },
+  green: {
+    color: '#effff4',
+    shadowDark: '#5d896f',
+    shadowLight: '#fbfffd',
+  },
+  orange: {
+    color: '#fff5e6',
+    shadowDark: '#8b6341',
+    shadowLight: '#fffdf8',
+  },
+  white: {
+    color: '#ffffff',
+    shadowDark: '#7d8794',
+    shadowLight: '#ffffff',
+  },
+}
+
 const BG_CYCLE = ['pink', 'green', 'orange', 'white'] as const
 const CYCLE_DURATION_MS = 5000
 
@@ -71,13 +99,16 @@ const MarqueeRow = ({
   text,
   direction,
   duration,
+  theme,
 }: {
   text: string
   direction: 'ltr' | 'rtl'
   duration: number
+  theme: MarqueeTheme
 }) => {
   const indices = Array.from({ length: 8 }, (_, i) => i)
   const animName = direction === 'rtl' ? 'marquee-rtl' : 'marquee-ltr'
+  const tone = MARQUEE_THEME_STYLES[theme]
   const renderItems = (keyPrefix: string) =>
     indices.map((i) => (
       <span key={`${keyPrefix}-${i}`} className="mx-6 shrink-0">
@@ -87,10 +118,16 @@ const MarqueeRow = ({
   return (
     <div className="w-full overflow-hidden">
       <div
-        className="flex whitespace-nowrap font-bold text-slate-300/25"
+        className="inline-flex whitespace-nowrap font-bold"
         style={{
           fontSize: '5rem',
+          color: tone.color,
+          opacity: 0.35,
           animation: `${animName} ${duration}s linear infinite`,
+          textShadow: `0px 8px 4px ${tone.shadowDark}, 0px -1px 1px ${tone.shadowLight}`,
+          willChange: 'transform',
+          transform: 'translate3d(0, 0, 0)',
+          backfaceVisibility: 'hidden',
         }}
       >
         <div className="flex shrink-0">{renderItems('a')}</div>
@@ -100,10 +137,14 @@ const MarqueeRow = ({
   )
 }
 
-export const MarqueeBackground = () => (
+export const MarqueeBackground = ({
+  theme = 'white',
+}: {
+  theme?: MarqueeTheme
+}) => (
   <div className="absolute inset-0 hidden md:flex flex-col justify-around overflow-hidden pointer-events-none">
     {MARQUEE_ROWS.map((row) => (
-      <MarqueeRow key={row.text} {...row} />
+      <MarqueeRow key={row.text} {...row} theme={theme} />
     ))}
   </div>
 )
@@ -144,7 +185,7 @@ export const PageShell = ({ children }: Props) => {
       style={{ backgroundColor: outerBg }}
     >
       {/* マーキー背景（PCのみ表示） */}
-      <MarqueeBackground />
+      <MarqueeBackground theme={BG_CYCLE[bgKey]} />
 
       {/* スマホフレーム：mobile=フル画面 / md+=電話型枠 */}
       <div
