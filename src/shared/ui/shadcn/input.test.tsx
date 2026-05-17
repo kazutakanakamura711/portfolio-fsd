@@ -28,8 +28,9 @@ describe('Input', () => {
   })
 
   it('type="password"の場合、パスワード入力フィールドになる', () => {
-    render(<Input type="password" />)
-    const input = screen.getByRole('textbox')
+    const { container } = render(<Input type="password" />)
+    const input = container.querySelector('input')
+    expect(input).not.toBeNull()
     expect(input).toHaveAttribute('type', 'password')
   })
 
