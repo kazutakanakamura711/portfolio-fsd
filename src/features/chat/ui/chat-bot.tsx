@@ -111,8 +111,8 @@ export const ChatBot = () => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="メッセージを入力..."
-                className="bg-white/10 text-sm"
+                placeholder="メッセージを入力してください"
+                className="bg-white/10 text-base md:text-sm"
                 disabled={isLoading}
               />
               <Button
