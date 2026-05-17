@@ -9,13 +9,14 @@ React + TypeScript + Vite をベースに、Feature-Sliced Design（FSD）アー
 
 ## ページ構成
 
-| パス            | 内容                                                                   |
-| --------------- | ---------------------------------------------------------------------- |
-| `/`             | TOP — ヒーロー・プロフィール概要・アプリ一覧カルーセル・ギャラリー抜粋 |
-| `/profile`      | PROFILE — 経歴・スキル詳細                                             |
-| `/applications` | APPLICATIONS — 制作したアプリの一覧（MicroCMS から取得）               |
-| `/gallery`      | GALLERY — 写真ギャラリー                                               |
-| `/contact`      | CONTACT — お問い合わせフォーム（EmailJS 送信）                         |
+| パス            | 内容                                                      |
+| --------------- | --------------------------------------------------------- |
+| `/`             | TOP — ヒーロー・プロフィール概要・主要コンテンツへの導線  |
+| `/profile`      | PROFILE — 経歴・スキル詳細                                |
+| `/applications` | APPLICATIONS — 制作したアプリの一覧（MicroCMS から取得）  |
+| `/works`        | WORKS — 実績・制作物の一覧（MicroCMS から取得）           |
+| `/wordpress`    | WORDPRESS — WordPress 関連の実績一覧（MicroCMS から取得） |
+| `/contact`      | CONTACT — お問い合わせフォーム（EmailJS 送信）            |
 
 ---
 
@@ -24,11 +25,18 @@ React + TypeScript + Vite をベースに、Feature-Sliced Design（FSD）アー
 ### フロントエンド
 
 - **React 19** / **TypeScript**
-- **Vite 7**
+- **Vite 8**
 - **Tailwind CSS v4** + shadcn/ui + Radix UI
 - **React Router v7**
 - **Embla Carousel**
+- **Framer Motion**
+- **Three.js**（@react-three/fiber / @react-three/drei）
 - **EmailJS**（お問い合わせメール送信）
+
+### AI / API
+
+- **Gemini API**（@google/genai）
+- **Vercel Serverless Functions**（`/api/chat`）
 
 ### CMS
 
@@ -50,13 +58,26 @@ React + TypeScript + Vite をベースに、Feature-Sliced Design（FSD）アー
 - **vite-plugin-sitemap**（`sitemap.xml` / `robots.txt` 自動生成）
 - MicroCMS Image API パラメータ（`?w=800&q=75&fm=webp`）による配信最適化
 
-**ページを追加した際は `vite.config.ts` の `dynamicRoutes` にもパスを追記してください。**
+**ページを追加した際は `vite.config.ts` の `dynamicRoutes` と `vercel.json` の `rewrites` の両方にパスを追記してください。**
 
 ```ts
 sitemap({
   hostname: 'https://portfolio.sakura-kn.com',
-  dynamicRoutes: ['/', '/profile', '/applications', '/gallery', '/contact', '/new-page'],
+  dynamicRoutes: ['/', '/profile', '/applications', '/works', '/wordpress', '/contact', '/new-page'],
 }),
+```
+
+```json
+{
+  "rewrites": [
+    { "source": "/profile", "destination": "/index.html" },
+    { "source": "/applications", "destination": "/index.html" },
+    { "source": "/works", "destination": "/index.html" },
+    { "source": "/wordpress", "destination": "/index.html" },
+    { "source": "/contact", "destination": "/index.html" },
+    { "source": "/new-page", "destination": "/index.html" }
+  ]
+}
 ```
 
 ---
@@ -88,12 +109,14 @@ cp .env.example .env.local
 # VITE_MICROCMS_SERVICE_DOMAIN と VITE_MICROCMS_API_KEY を設定
 # さらに Contact フォームを使う場合は
 # VITE_EMAILJS_SERVICE_ID / VITE_EMAILJS_TEMPLATE_ID / VITE_EMAILJS_PUBLIC_KEY を設定
+# チャットボットを使う場合は GEMINI_API_KEY を設定
 ```
 
 - `npm run dev` では `.env.local` を参照します。
 - ローカルで `npm run build` を実行する場合は `.env.production` を参照します。
-- GitHub Actions 上の `npm run build` では `.env.production` ではなく GitHub Secrets を参照します。
+- Vercel 上のビルドでは `.env.production` ではなく Vercel の Environment Variables を参照します。
 - `VITE_CONTACT_TO_EMAIL` は任意です。EmailJS のテンプレート側で送信先が固定されている場合は空でも動作します。
+- `GEMINI_API_KEY` は Vercel の Project Settings > Environment Variables にも必ず設定してください。
 
 ---
 
@@ -161,46 +184,28 @@ src/entities/microcms/{name}/
 
 ---
 
-## CI/CD
+## デプロイ（Vercel）
 
-`main` ブランチへ push／merge すると、GitHub Actions が自動でビルド・デプロイを実行します。
+このプロジェクトは Vercel でデプロイしています。
 
-### フロー
+### ルーティング設定（SPA fallback）
 
-```
-main ブランチへ push
-  └─ ① ユニットテスト実行（Vitest）
-  └─ ② 本番ビルド（vite build）
-  └─ ③ dist/ をロリポップへ FTPS 転送（差分のみ）
-```
+React Router のページを直接リロードしても 404 にならないように、`vercel.json` の `rewrites` で各ページを `index.html` にフォールバックしています。
 
-### 使用ツール
+新しいページを追加した場合は、必ず `vercel.json` にも同じパスを追加してください。
 
-| 用途           | Action                                                                               |
-| -------------- | ------------------------------------------------------------------------------------ |
-| デプロイ       | [SamKirkland/FTP-Deploy-Action](https://github.com/SamKirkland/FTP-Deploy-Action) v4 |
-| 通信プロトコル | FTPS（FTP over TLS）ポート 21                                                        |
+### Vercel Environment Variables
 
-### GitHub Secrets の設定
+Vercel の Project Settings > Environment Variables に以下を登録してください。
 
-リポジトリの **Settings > Secrets and variables > Actions** に以下を登録してください。
+| 変数名                         | 説明                                                       |
+| ------------------------------ | ---------------------------------------------------------- |
+| `VITE_MICROCMS_SERVICE_DOMAIN` | MicroCMS サービスドメイン                                  |
+| `VITE_MICROCMS_API_KEY`        | MicroCMS API キー                                          |
+| `VITE_EMAILJS_SERVICE_ID`      | EmailJS の Service ID                                      |
+| `VITE_EMAILJS_TEMPLATE_ID`     | EmailJS の Template ID                                     |
+| `VITE_EMAILJS_PUBLIC_KEY`      | EmailJS の Public Key                                      |
+| `VITE_CONTACT_TO_EMAIL`        | 送信先メールアドレス（任意。テンプレート側で固定なら不要） |
+| `GEMINI_API_KEY`               | チャットボット（`/api/chat`）で使用する Gemini API キー    |
 
-| Secret 名                      | 説明                                                          |
-| ------------------------------ | ------------------------------------------------------------- |
-| `FTP_SERVER`                   | ロリポップの FTP サーバーホスト（例: `ftp.lolipop.jp`）       |
-| `FTP_USERNAME`                 | ロリポップの FTP ユーザー名                                   |
-| `FTP_PASSWORD`                 | ロリポップの FTP パスワード                                   |
-| `FTP_REMOTE_DIR`               | サーバー上のデプロイ先パス（例: `/portfolio.sakura-kn.com/`） |
-| `VITE_MICROCMS_SERVICE_DOMAIN` | MicroCMS サービスドメイン                                     |
-| `VITE_MICROCMS_API_KEY`        | MicroCMS API キー                                             |
-| `VITE_EMAILJS_SERVICE_ID`      | EmailJS の Service ID                                         |
-| `VITE_EMAILJS_TEMPLATE_ID`     | EmailJS の Template ID                                        |
-| `VITE_EMAILJS_PUBLIC_KEY`      | EmailJS の Public Key                                         |
-| `VITE_CONTACT_TO_EMAIL`        | 送信先メールアドレス（任意。テンプレート側で固定なら不要）    |
-
-GitHub Actions で本番ビルドする場合、これらの値は `.env.production` ではなく GitHub Secrets から注入されます。
-
-### 注意
-
-- React Router を使った SPA のため、サーバー側に `.htaccess` を設置して全リクエストを `index.html` へリダイレクトする必要があります（ロリポップは Apache のため `.htaccess` が利用可能）。
-- 2 回目以降のデプロイは差分ファイルのみを転送するため高速です。ステートファイル `.ftp-deploy-sync-state.json` はサーバー上に保持されます。
+`GEMINI_API_KEY` が未設定の場合、チャット API は正しく動作しません。
