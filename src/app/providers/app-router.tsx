@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { BrowserRouter, useLocation, useRoutes } from 'react-router-dom'
 import { routes } from '@/app/routes'
+import { ChatBotContainer } from '@/features/chat'
 
 declare const gtag: (...args: unknown[]) => void
 
@@ -24,6 +25,7 @@ export const AppRouter = () => {
   return (
     <BrowserRouter>
       <AppRoutes />
+      <ChatBotContainer />
     </BrowserRouter>
   )
 }

@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react'
 
-import { Button } from '@/shared/ui'
+import { Button, Input } from '@/shared/ui'
 import type { ContactFormState } from '../model'
 
 type ContactFormSubmitHandler = NonNullable<ComponentProps<'form'>['onSubmit']>
@@ -30,14 +30,14 @@ export const ContactForm = ({
         <label htmlFor="contact-name" className="text-sm font-medium">
           お名前 <span className="text-red-600">*</span>
         </label>
-        <input
+        <Input
           id="contact-name"
           name="name"
           type="text"
           value={form.name}
           onChange={(event) => setField('name', event.target.value)}
-          className="h-11 rounded-md border border-input bg-background px-3 text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-foreground"
           autoComplete="name"
+          placeholder="お名前を入力してください"
         />
       </div>
 
@@ -45,14 +45,14 @@ export const ContactForm = ({
         <label htmlFor="contact-email" className="text-sm font-medium">
           メールアドレス <span className="text-red-600">*</span>
         </label>
-        <input
+        <Input
           id="contact-email"
           name="email"
           type="email"
           value={form.email}
           onChange={(event) => setField('email', event.target.value)}
-          className="h-11 rounded-md border border-input bg-background px-3 text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-foreground"
           autoComplete="email"
+          placeholder="example@email.com"
         />
       </div>
 
@@ -60,13 +60,13 @@ export const ContactForm = ({
         <label htmlFor="contact-subject" className="text-sm font-medium">
           件名
         </label>
-        <input
+        <Input
           id="contact-subject"
           name="subject"
           type="text"
           value={form.subject}
           onChange={(event) => setField('subject', event.target.value)}
-          className="h-11 rounded-md border border-input bg-background px-3 text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-foreground"
+          placeholder="件名を入力してください"
         />
       </div>
 
@@ -83,7 +83,7 @@ export const ContactForm = ({
         />
       </div>
 
-      <input
+      <Input
         type="text"
         tabIndex={-1}
         autoComplete="off"
