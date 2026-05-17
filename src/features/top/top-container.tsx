@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { useApplications, useWorks, useWordpress } from '@/shared/hooks'
@@ -115,7 +115,13 @@ const HeroWave = () => {
   )
 }
 
-const HeroCaption = ({ bgColor: _bgColor }: { bgColor: string }) => {
+const HeroCaption = ({
+  bgColor: _bgColor,
+  onContactClick,
+}: {
+  bgColor: string
+  onContactClick: () => void
+}) => {
   return (
     <div className="flex w-full flex-col items-center gap-3 px-6 py-6 text-center">
       <motion.div
@@ -126,6 +132,7 @@ const HeroCaption = ({ bgColor: _bgColor }: { bgColor: string }) => {
       >
         <Button
           type="button"
+          onClick={onContactClick}
           className="rounded-full px-8 py-3 bg-white text-[#333333] hover:bg-white/90 hover:scale-105 active:scale-95 transition-transform duration-200"
         >
           お問い合わせ
@@ -151,6 +158,7 @@ export const TopContainer = () => {
   const [menuOpen, setMenuOpen] = useState(false)
   const [hasScrolled, setHasScrolled] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const navigate = useNavigate()
   const { applications, isLoading } = useApplications()
   const { works, isLoading: isWorksLoading } = useWorks()
   const { wordpresses, isLoading: isWordpressLoading } = useWordpress()
@@ -160,6 +168,10 @@ export const TopContainer = () => {
       setHasScrolled(true)
     }
   }, [hasScrolled])
+
+  const handleContactClick = () => {
+    navigate(PATHS.CONTACT)
+  }
 
   return (
     <div
@@ -282,7 +294,10 @@ export const TopContainer = () => {
 
           {/* Hero キャプション */}
           <div style={{ backgroundColor: '#262626' }}>
-            <HeroCaption bgColor={bgColor} />
+            <HeroCaption
+              bgColor={bgColor}
+              onContactClick={handleContactClick}
+            />
           </div>
 
           {/* Profile */}
