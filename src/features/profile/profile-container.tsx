@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Heading, Title, PageShell } from '@/shared/ui'
 import { fadeInDown, fadeInUp, staggerContainer } from '@/shared/lib/animations'
-import { useProfile, useCareers } from '@/shared/hooks'
+import { useProfile } from '@/shared/hooks'
 import {
   ProfileHero,
   ProfileCareer,
@@ -11,7 +11,6 @@ import {
 
 export const ProfileContainer = () => {
   const { profile, isLoading } = useProfile()
-  const { careers, isLoading: isCareersLoading } = useCareers()
 
   return (
     <PageShell>
@@ -29,7 +28,7 @@ export const ProfileContainer = () => {
           <motion.div variants={fadeInDown} className="self-center">
             <Title as={Heading.H1}>PROFILE</Title>
           </motion.div>
-          {!isLoading && !isCareersLoading && profile && (
+          {!isLoading && profile && (
             <>
               <motion.div
                 variants={fadeInUp}
@@ -45,7 +44,7 @@ export const ProfileContainer = () => {
                 className="flex flex-col gap-8 bg-white/10 p-6 overflow-hidden wrap-break-word rounded-2xl"
               >
                 <ProfileCareer about={profile.about} />
-                <ProfileTimeline careers={careers} />
+                <ProfileTimeline careers={profile.careers} />
                 <ProfileSkills
                   programming_lang={profile.programming_lang}
                   framework={profile.framework}

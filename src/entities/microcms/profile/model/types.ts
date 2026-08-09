@@ -23,4 +23,12 @@ export type Profile = MicroCMSObjectContent & {
   communication: string
   ai_tool: string
   other: string
+  careers: (ProfileCareers)[]
+}
+
+export type ProfileCareers = {
+  fieldId: 'careers'
+  period?: string
+  title?: string
+  description?: string
 }

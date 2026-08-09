@@ -40,11 +40,18 @@ interface ApiField {
   name: string
   kind: string
   required: boolean
+  customFieldIds?: string[]
+}
+
+interface CustomField {
+  fieldId: string
+  name: string
+  fields: ApiField[]
 }
 
 interface ApiSchema {
   apiFields: ApiField[]
-  customFields: unknown[]
+  customFields: CustomField[]
 }
 
 // Pascal ケースに変換（例: applications → Applications）
@@ -63,19 +70,79 @@ function generateTypesContent(
 ): string {
   const typeName = toPascalCase(name)
   const fields = schema.apiFields
+  const customFieldsById = new Map(
+    schema.customFields.map((customField) => [customField.fieldId, customField])
+  )
+
+  const customFieldTypeName = (customField: CustomField) =>
+    `${typeName}${toPascalCase(customField.fieldId)}`
+
+  const fieldType = (field: ApiField) => {
+    if (field.kind !== 'repeater') {
+      return KIND_TO_TS_TYPE[field.kind] ?? 'unknown'
+    }
+
+    const repeaterTypes = (field.customFieldIds ?? [])
+      .map((customFieldId) => customFieldsById.get(customFieldId))
+      .filter((customField): customField is CustomField => Boolean(customField))
+      .map(customFieldTypeName)
+
+    return repeaterTypes.length > 0
+      ? `(${repeaterTypes.join(' | ')})[]`
+      : 'unknown[]'
+  }
 
   const fieldLines = fields
     .map((field) => {
-      const tsType = KIND_TO_TS_TYPE[field.kind] ?? 'unknown'
+      const tsType = fieldType(field)
       const optional = field.required ? '' : '?'
       return `  ${field.fieldId}${optional}: ${tsType}`
     })
     .join('\n')
 
+  const repeatedCustomFields = schema.apiFields
+    .filter((field) => field.kind === 'repeater')
+    .flatMap((field) => field.customFieldIds ?? [])
+    .map((customFieldId) => customFieldsById.get(customFieldId))
+    .filter((customField): customField is CustomField => Boolean(customField))
+    .filter(
+      (customField, index, customFields) =>
+        customFields.findIndex(
+          ({ fieldId }) => fieldId === customField.fieldId
+        ) === index
+    )
+
+  const customFieldTypes = repeatedCustomFields
+    .map((customField) => {
+      const customFieldLines = customField.fields
+        .map((field) => {
+          const tsType = KIND_TO_TS_TYPE[field.kind] ?? 'unknown'
+          const optional = field.required ? '' : '?'
+          return `  ${field.fieldId}${optional}: ${tsType}`
+        })
+        .join('\n')
+
+      return `export type ${customFieldTypeName(customField)} = {\n  fieldId: '${customField.fieldId}'\n${customFieldLines}\n}`
+    })
+    .join('\n\n')
+
   const baseType = isObject ? 'MicroCMSObjectContent' : 'MicroCMSListContent'
-  const importTypes = isObject
-    ? 'MicroCMSImage, MicroCMSObjectContent'
-    : 'MicroCMSImage, MicroCMSListContent'
+  const allFieldTypes = [
+    ...fields.map(fieldType),
+    ...repeatedCustomFields.flatMap((customField) =>
+      customField.fields.map(
+        (field) => KIND_TO_TS_TYPE[field.kind] ?? 'unknown'
+      )
+    ),
+  ]
+  const importTypes = [
+    ...(allFieldTypes.includes('MicroCMSImage') ? ['MicroCMSImage'] : []),
+    ...(allFieldTypes.includes('MicroCMSContentId') ||
+    allFieldTypes.includes('MicroCMSContentId[]')
+      ? ['MicroCMSContentId']
+      : []),
+    isObject ? 'MicroCMSObjectContent' : 'MicroCMSListContent',
+  ].join(', ')
   const subDir = isObject ? 'object-type' : 'list-type'
 
   return `/**
@@ -89,7 +156,7 @@ import type { ${importTypes} } from 'microcms-js-sdk'
 
 export type ${typeName} = ${baseType} & {
 ${fieldLines}
-}
+}${customFieldTypes ? `\n\n${customFieldTypes}` : ''}
 `
 }
 
