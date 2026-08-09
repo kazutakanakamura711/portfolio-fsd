@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Heading, Title, Skeleton, PageShell } from '@/shared/ui'
-import { useWordpress } from '@/shared/hooks'
+import { useProjects } from '@/shared/hooks'
 import { fadeInDown, fadeInUp, staggerContainer } from '@/shared/lib/animations'
 import { WordpressList } from './ui'
 
@@ -26,7 +26,7 @@ const WordpressSkeleton = () => (
 )
 
 export const WordpressContainer = () => {
-  const { wordpresses, isLoading } = useWordpress()
+  const { projects: wordpresses, isLoading } = useProjects('wordpress')
 
   return (
     <PageShell>

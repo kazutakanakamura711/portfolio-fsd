@@ -1,15 +1,15 @@
 import { useState } from 'react'
-import type { Applications } from '@/entities/microcms/applications'
+import type { Projects } from '@/entities/microcms/projects'
 import { Skeleton } from '@/shared/ui'
 
 type Props = {
-  applications: Applications[]
+  applications: Projects[]
 }
 
 const ApplicationItem = ({
   application,
 }: {
-  application: Applications
+  application: Projects
   index: number
 }) => {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -48,14 +48,16 @@ const ApplicationItem = ({
           >
             App →
           </a>
-          <a
-            href={application.github_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="tracking-wider hover:opacity-60 transition-opacity"
-          >
-            GitHub →
-          </a>
+          {application.github_url && (
+            <a
+              href={application.github_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="tracking-wider hover:opacity-60 transition-opacity"
+            >
+              GitHub →
+            </a>
+          )}
         </div>
       </div>
     </article>

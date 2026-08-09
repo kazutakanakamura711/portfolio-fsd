@@ -10,6 +10,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/lp",
+      "destination": "/index.html"
+    },
+    {
       "source": "/works",
       "destination": "/index.html"
     },

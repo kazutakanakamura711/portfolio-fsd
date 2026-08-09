@@ -1,13 +1,14 @@
 import { motion } from 'framer-motion'
-import { Heading, Title, Skeleton, PageShell } from '@/shared/ui'
-import { ApplicationsList } from './ui'
-import { useProjects } from '@/shared/hooks'
-import { fadeInDown, fadeInUp, staggerContainer } from '@/shared/lib/animations'
 
-const ApplicationsSkeleton = () => (
+import { fadeInDown, fadeInUp, staggerContainer } from '@/shared/lib/animations'
+import { useProjects } from '@/shared/hooks'
+import { Heading, PageShell, Skeleton, Title } from '@/shared/ui'
+import { LpList } from './ui'
+
+const LpSkeleton = () => (
   <div className="flex flex-col gap-8 animate-in fade-in duration-300">
-    {Array.from({ length: 3 }).map((_, i) => (
-      <div key={i} className="flex flex-col gap-8 border-t pt-8">
+    {Array.from({ length: 3 }).map((_, index) => (
+      <div key={index} className="flex flex-col gap-8 border-t pt-8">
         <Skeleton className="w-full aspect-3/2" />
         <div className="flex flex-col gap-4">
           <Skeleton className="h-6 w-1/2" />
@@ -20,8 +21,8 @@ const ApplicationsSkeleton = () => (
   </div>
 )
 
-export const ApplicationsContainer = () => {
-  const { projects: applications, isLoading } = useProjects('application')
+export const LpContainer = () => {
+  const { projects: landingPages, isLoading } = useProjects('lp')
 
   return (
     <PageShell>
@@ -37,13 +38,13 @@ export const ApplicationsContainer = () => {
           viewport={{ once: true, amount: 0.1 }}
         >
           <motion.div variants={fadeInDown} className="self-center">
-            <Title as={Heading.H1}>APPLICATIONS</Title>
+            <Title as={Heading.H1}>LANDING PAGES</Title>
           </motion.div>
           <motion.div variants={fadeInUp}>
             {isLoading ? (
-              <ApplicationsSkeleton />
+              <LpSkeleton />
             ) : (
-              <ApplicationsList applications={applications} />
+              <LpList landingPages={landingPages} />
             )}
           </motion.div>
         </motion.div>

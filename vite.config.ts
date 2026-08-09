@@ -33,6 +33,7 @@ export default defineConfig({
         '/',
         '/profile',
         '/applications',
+        '/lp',
         '/works',
         '/wordpress',
         '/contact',
