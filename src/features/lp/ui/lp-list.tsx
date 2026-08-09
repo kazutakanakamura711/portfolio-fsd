@@ -33,14 +33,26 @@ const LpItem = ({ landingPage }: { landingPage: Projects }) => {
         </h2>
         <p className="text-sm leading-relaxed">{landingPage.description}</p>
         <p className="text-xs">{landingPage.technologies}</p>
-        <a
-          href={landingPage.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-sm tracking-wider hover:opacity-60 transition-opacity"
-        >
-          Site →
-        </a>
+        <div className="flex gap-6 text-sm">
+          <a
+            href={landingPage.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="tracking-wider hover:opacity-60 transition-opacity"
+          >
+            Site →
+          </a>
+          {landingPage.github_url && (
+            <a
+              href={landingPage.github_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="tracking-wider hover:opacity-60 transition-opacity"
+            >
+              GitHub →
+            </a>
+          )}
+        </div>
       </div>
     </article>
   )
