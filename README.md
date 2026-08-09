@@ -12,6 +12,14 @@ cp .env.example .env.local
 npm run dev
 ```
 
+通常の画面開発は `npm run dev` で起動できます。チャット機能（`/api/chat`）をローカルで確認する場合は、Vercel Functionsも起動する次のコマンドを使用してください。
+
+```bash
+npm run dev:vercel
+```
+
+表示された `http://localhost:3000` をブラウザで開いて確認します。`GEMINI_API_KEY` はブラウザに公開せず、VercelのDevelopment環境変数として設定してください。
+
 ## ドキュメント
 
 - [開発・コミット・PR・リリース運用](docs/CONTRIBUTING.md)
