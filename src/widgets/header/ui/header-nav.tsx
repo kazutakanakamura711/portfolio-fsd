@@ -7,6 +7,7 @@ const NAV_ITEMS = [
   { label: 'WORKS', path: PATHS.WORKS },
   { label: 'WORDPRESS', path: PATHS.WORDPRESS },
   { label: 'APPLICATIONS', path: PATHS.APPLICATIONS },
+  { label: 'LP', path: PATHS.LP },
   { label: 'CONTACT', path: PATHS.CONTACT },
 ]
 

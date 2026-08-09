@@ -14,6 +14,7 @@ React + TypeScript + Vite をベースに、Feature-Sliced Design（FSD）アー
 | `/`             | TOP — ヒーロー・プロフィール概要・主要コンテンツへの導線  |
 | `/profile`      | PROFILE — 経歴・スキル詳細                                |
 | `/applications` | APPLICATIONS — 制作したアプリの一覧（MicroCMS から取得）  |
+| `/lp`           | LANDING PAGES — 制作したLPの一覧（MicroCMS から取得）     |
 | `/works`        | WORKS — 実績・制作物の一覧（MicroCMS から取得）           |
 | `/wordpress`    | WORDPRESS — WordPress 関連の実績一覧（MicroCMS から取得） |
 | `/contact`      | CONTACT — お問い合わせフォーム（EmailJS 送信）            |
@@ -40,7 +41,7 @@ React + TypeScript + Vite をベースに、Feature-Sliced Design（FSD）アー
 
 ### CMS
 
-- **MicroCMS** — アプリケーション一覧の管理
+- **MicroCMS** — projects APIによる制作実績の一元管理
 
 ### テスト
 
@@ -63,7 +64,7 @@ React + TypeScript + Vite をベースに、Feature-Sliced Design（FSD）アー
 ```ts
 sitemap({
   hostname: 'https://portfolio.sakura-kn.com',
-  dynamicRoutes: ['/', '/profile', '/applications', '/works', '/wordpress', '/contact', '/new-page'],
+  dynamicRoutes: ['/', '/profile', '/applications', '/lp', '/works', '/wordpress', '/contact'],
 }),
 ```
 
@@ -72,10 +73,10 @@ sitemap({
   "rewrites": [
     { "source": "/profile", "destination": "/index.html" },
     { "source": "/applications", "destination": "/index.html" },
+    { "source": "/lp", "destination": "/index.html" },
     { "source": "/works", "destination": "/index.html" },
     { "source": "/wordpress", "destination": "/index.html" },
-    { "source": "/contact", "destination": "/index.html" },
-    { "source": "/new-page", "destination": "/index.html" }
+    { "source": "/contact", "destination": "/index.html" }
   ]
 }
 ```
@@ -163,7 +164,7 @@ MicroCMS の API スキーマ（JSON）をエクスポートし、TypeScript 型
 2. 「API 設定」→「API スキーマ」→「エクスポート」をクリック
 3. ダウンロードした JSON ファイルを `cms-schemas/` ディレクトリに配置する
 
-ファイル名は `api-{name}.json` の形式にする（例: `api-applications.json`）。
+ファイル名は `api-{name}.json` の形式にする（例: `api-projects.json`）。
 
 **2. 型定義を生成する**
 
@@ -180,7 +181,7 @@ src/entities/microcms/{name}/
 └── index.ts       # 型の re-export
 ```
 
-例えば `api-applications.json` を配置した場合、`Applications` 型が `src/entities/microcms/applications/` に生成されます。
+例えば `api-projects.json` を配置した場合、`Projects` 型が `src/entities/microcms/projects/` に生成されます。
 
 ---
 

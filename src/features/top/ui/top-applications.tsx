@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 
-import type { Applications } from '@/entities/microcms/applications'
+import type { Projects } from '@/entities/microcms/projects'
 import applicationsImage from '@/shared/assets/top/img-top-applications.webp'
 import { fadeInDown, fadeInUp, staggerContainer } from '@/shared/lib/animations'
 import { Skeleton } from '@/shared/ui'
@@ -9,7 +9,7 @@ import { TopCarousel } from './top-carousel'
 import { Title } from '@/shared/ui'
 
 type Props = {
-  applications: Applications[]
+  applications: Projects[]
   isLoading: boolean
 }
 

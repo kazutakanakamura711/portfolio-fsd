@@ -1,0 +1,83 @@
+{
+  "apiFields": [
+    {
+      "fieldId": "type",
+      "name": "type",
+      "kind": "select",
+      "description": null,
+      "required": true,
+      "selectItems": [
+        { "id": "EBi0yKoUnn", "value": "application" },
+        { "id": "j-LlNfegBO", "value": "work" },
+        { "id": "AH9qcbAWSX", "value": "wordpress" },
+        { "id": "ddcRT8US5u", "value": "lp" }
+      ],
+      "multipleSelect": false,
+      "initialValue": ["DEFAULT"]
+    },
+    {
+      "fieldId": "title",
+      "name": "title",
+      "kind": "text",
+      "description": null,
+      "required": true,
+      "textSizeLimitValidation": null,
+      "patternMatchValidation": null,
+      "isUnique": false,
+      "initialValue": null
+    },
+    {
+      "fieldId": "description",
+      "name": "description",
+      "kind": "textArea",
+      "description": null,
+      "required": true,
+      "textSizeLimitValidation": null,
+      "patternMatchValidation": null,
+      "initialValue": null
+    },
+    {
+      "fieldId": "thumbnail",
+      "name": "thumbnail",
+      "kind": "media",
+      "description": null,
+      "required": true,
+      "imageSizeValidation": null,
+      "initialValue": null
+    },
+    {
+      "fieldId": "url",
+      "name": "url",
+      "kind": "text",
+      "description": null,
+      "required": true,
+      "textSizeLimitValidation": null,
+      "patternMatchValidation": null,
+      "isUnique": false,
+      "initialValue": null
+    },
+    {
+      "fieldId": "github_url",
+      "name": "github_url",
+      "kind": "text",
+      "description": null,
+      "required": false,
+      "textSizeLimitValidation": null,
+      "patternMatchValidation": null,
+      "isUnique": false,
+      "initialValue": null
+    },
+    {
+      "fieldId": "technologies",
+      "name": "technologies",
+      "kind": "text",
+      "description": null,
+      "required": true,
+      "textSizeLimitValidation": null,
+      "patternMatchValidation": null,
+      "isUnique": false,
+      "initialValue": null
+    }
+  ],
+  "customFields": []
+}

@@ -18,6 +18,7 @@ describe('HeaderNav', () => {
     expect(screen.getByText('WORKS')).toBeInTheDocument()
     expect(screen.getByText('WORDPRESS')).toBeInTheDocument()
     expect(screen.getByText('APPLICATIONS')).toBeInTheDocument()
+    expect(screen.getByText('LP')).toBeInTheDocument()
     expect(screen.getByText('CONTACT')).toBeInTheDocument()
   })
 
@@ -42,6 +43,10 @@ describe('HeaderNav', () => {
     expect(screen.getByRole('link', { name: 'APPLICATIONS' })).toHaveAttribute(
       'href',
       '/applications'
+    )
+    expect(screen.getByRole('link', { name: 'LP' })).toHaveAttribute(
+      'href',
+      '/lp'
     )
     expect(screen.getByRole('link', { name: 'CONTACT' })).toHaveAttribute(
       'href',

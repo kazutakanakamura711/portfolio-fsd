@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import type { Applications } from '@/entities/microcms/applications'
+import type { Projects } from '@/entities/microcms/projects'
 import {
   Carousel,
   CarouselContent,
@@ -18,7 +18,7 @@ import {
 import { ExternalLink } from 'lucide-react'
 
 type Props = {
-  applications: Applications[]
+  applications: Projects[]
 }
 
 export const TopCarousel = ({ applications }: Props) => {
@@ -117,15 +117,17 @@ export const TopCarousel = ({ applications }: Props) => {
                     <ExternalLink size={14} />
                     <span>App</span>
                   </a>
-                  <a
-                    href={application.github_url}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={`${application.title} GitHub`}
-                    className="flex items-center gap-1 text-sm hover:opacity-60 transition-opacity"
-                  >
-                    <span>GitHub</span>
-                  </a>
+                  {application.github_url && (
+                    <a
+                      href={application.github_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${application.title} GitHub`}
+                      className="flex items-center gap-1 text-sm hover:opacity-60 transition-opacity"
+                    >
+                      <span>GitHub</span>
+                    </a>
+                  )}
                 </CardFooter>
               </Card>
             </CarouselItem>

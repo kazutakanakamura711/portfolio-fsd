@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ExternalLink } from 'lucide-react'
 
-import type { Works } from '@/entities/microcms/works'
+import type { Projects } from '@/entities/microcms/projects'
 import {
   Card,
   CardContent,
@@ -18,7 +18,7 @@ import {
 } from '@/shared/ui'
 
 type Props = {
-  works: Works[]
+  works: Projects[]
 }
 
 const splitTechnologies = (technologies: string): string[] => {

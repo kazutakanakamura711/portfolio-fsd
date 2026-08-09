@@ -28,7 +28,7 @@ const KIND_TO_TS_TYPE: Record<string, string> = {
   boolean: 'boolean',
   media: 'MicroCMSImage',
   date: 'string',
-  select: 'string',
+  select: 'string[]',
   relation: 'MicroCMSContentId',
   relationList: 'MicroCMSContentId[]',
   repeater: 'unknown[]',

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ExternalLink } from 'lucide-react'
 
-import type { Wordpress } from '@/entities/microcms/wordpress'
+import type { Projects } from '@/entities/microcms/projects'
 import {
   Card,
   CardContent,
@@ -18,7 +18,7 @@ import {
 } from '@/shared/ui'
 
 type Props = {
-  wordpresses: Wordpress[]
+  wordpresses: Projects[]
 }
 
 const splitTechnologies = (technologies: string): string[] => {

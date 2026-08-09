@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 
-import type { Wordpress } from '@/entities/microcms/wordpress'
+import type { Projects } from '@/entities/microcms/projects'
 import { fadeInDown, fadeInUp, staggerContainer } from '@/shared/lib/animations'
 import { Skeleton, Title } from '@/shared/ui'
 import wordpressImage from '@/shared/assets/top/img-top-wordpress.webp'
 import { TopWordpressCarousel } from './top-wordpress-carousel'
 
 type Props = {
-  wordpresses: Wordpress[]
+  wordpresses: Projects[]
   isLoading: boolean
 }
 

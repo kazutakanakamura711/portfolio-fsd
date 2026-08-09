@@ -2,34 +2,34 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 import type { Projects } from '@/entities/microcms/projects'
+import landingPagesImage from '@/shared/assets/top/img-top-lp.png'
 import { fadeInDown, fadeInUp, staggerContainer } from '@/shared/lib/animations'
 import { Skeleton, Title } from '@/shared/ui'
-import worksImage from '@/shared/assets/top/img-top-works.webp'
 import { TopWorksCarousel } from './top-works-carousel'
 
 type Props = {
-  works: Projects[]
+  landingPages: Projects[]
   isLoading: boolean
 }
 
-export const TopWorks = ({ works, isLoading }: Props) => {
+export const TopLp = ({ landingPages, isLoading }: Props) => {
   const [isIntroImageLoaded, setIsIntroImageLoaded] = useState(false)
-  const featuredWork = works[0]
+  const featuredLandingPage = landingPages[0]
 
   if (isLoading) {
     return (
       <section className="flex flex-col gap-8">
-        <Title>WORKS</Title>
+        <Title>LANDING PAGES</Title>
         <p className="text-center text-sm">Loading...</p>
       </section>
     )
   }
 
-  if (works.length === 0 || !featuredWork) {
+  if (landingPages.length === 0 || !featuredLandingPage) {
     return (
       <section className="flex flex-col gap-8">
-        <Title>WORKS</Title>
-        <p className="text-center text-sm">No works found.</p>
+        <Title>LANDING PAGES</Title>
+        <p className="text-center text-sm">No landing pages found.</p>
       </section>
     )
   }
@@ -43,7 +43,7 @@ export const TopWorks = ({ works, isLoading }: Props) => {
       viewport={{ once: true, amount: 0.2 }}
     >
       <motion.div variants={fadeInDown} className="self-center">
-        <Title>WORKS</Title>
+        <Title>LANDING PAGES</Title>
       </motion.div>
 
       <motion.div
@@ -55,8 +55,8 @@ export const TopWorks = ({ works, isLoading }: Props) => {
             <Skeleton className="w-full aspect-3/2 rounded-none" />
           )}
           <img
-            src={worksImage}
-            alt={featuredWork.title}
+            src={landingPagesImage}
+            alt={featuredLandingPage.title}
             className={`w-full h-auto object-cover transition-opacity duration-300 ${
               isIntroImageLoaded
                 ? 'opacity-100'
@@ -67,13 +67,13 @@ export const TopWorks = ({ works, isLoading }: Props) => {
           />
         </div>
         <p className="w-full text-sm leading-relaxed">
-          実案件として制作したWebサイトやLPの実績です。企画意図や導線設計を踏まえつつ、
-          デザインを忠実に再現し、運用しやすいフロントエンドとして構築しています。
+          コンセプトやブランドの魅力を、情報設計とビジュアルで伝えるランディングページです。
+          目的に合わせた世界観と導線を設計し、印象に残る体験を制作しています。
         </p>
       </motion.div>
 
       <motion.div variants={fadeInUp} className="w-full">
-        <TopWorksCarousel works={works} />
+        <TopWorksCarousel works={landingPages} />
       </motion.div>
     </motion.section>
   )

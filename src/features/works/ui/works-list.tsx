@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
-import type { Works } from '@/entities/microcms/works'
+import type { Projects } from '@/entities/microcms/projects'
 import { Skeleton } from '@/shared/ui'
 
 type Props = {
-  works: Works[]
+  works: Projects[]
 }
 
 const splitTechnologies = (technologies: string): string[] => {
@@ -14,7 +14,7 @@ const splitTechnologies = (technologies: string): string[] => {
     .filter(Boolean)
 }
 
-const WorkItem = ({ work }: { work: Works; index: number }) => {
+const WorkItem = ({ work }: { work: Projects; index: number }) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const techTags = splitTechnologies(work.technologies)
 

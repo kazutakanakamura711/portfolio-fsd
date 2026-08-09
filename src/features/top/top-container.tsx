@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-import { useApplications, useWorks, useWordpress } from '@/shared/hooks'
+import { useProjects } from '@/shared/hooks'
 import { Button, MarqueeBackground } from '@/shared/ui'
 import { PATHS } from '@/app/routes/paths'
 import { TopHero, TopProfile } from './ui'
@@ -10,6 +10,7 @@ import { TopApplications } from './ui/top-applications'
 import { TopContact } from './ui/top-contact'
 import { TopWorks } from './ui/top-works'
 import { TopWordpress } from './ui/top-wordpress'
+import { TopLp } from './ui/top-lp'
 
 // ─── BG カラー ─────────────────────────────────────────
 const BG_COLORS: Record<string, string> = {
@@ -149,6 +150,7 @@ const NAV_ITEMS = [
   { label: 'WORKS', path: PATHS.WORKS },
   { label: 'WORDPRESS', path: PATHS.WORDPRESS },
   { label: 'APPLICATIONS', path: PATHS.APPLICATIONS },
+  { label: 'LP', path: PATHS.LP },
   { label: 'CONTACT', path: PATHS.CONTACT },
 ]
 
@@ -159,9 +161,15 @@ export const TopContainer = () => {
   const [hasScrolled, setHasScrolled] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
-  const { applications, isLoading } = useApplications()
-  const { works, isLoading: isWorksLoading } = useWorks()
-  const { wordpresses, isLoading: isWordpressLoading } = useWordpress()
+  const { projects, isLoading } = useProjects()
+  const applications = projects.filter((project) =>
+    project.type.includes('application')
+  )
+  const works = projects.filter((project) => project.type.includes('work'))
+  const wordpresses = projects.filter((project) =>
+    project.type.includes('wordpress')
+  )
+  const landingPages = projects.filter((project) => project.type.includes('lp'))
 
   const handleScroll = useCallback(() => {
     if (!hasScrolled && scrollRef.current && scrollRef.current.scrollTop > 20) {
@@ -315,7 +323,7 @@ export const TopContainer = () => {
             className="px-6 py-10 text-white"
             style={{ backgroundColor: '#262626' }}
           >
-            <TopWorks works={works} isLoading={isWorksLoading} />
+            <TopWorks works={works} isLoading={isLoading} />
           </section>
 
           {/* WordPress */}
@@ -324,10 +332,7 @@ export const TopContainer = () => {
             className="px-6 py-10 text-white"
             style={{ backgroundColor: '#262626' }}
           >
-            <TopWordpress
-              wordpresses={wordpresses}
-              isLoading={isWordpressLoading}
-            />
+            <TopWordpress wordpresses={wordpresses} isLoading={isLoading} />
           </section>
 
           {/* Applications */}
@@ -340,6 +345,15 @@ export const TopContainer = () => {
               applications={applications}
               isLoading={isLoading}
             />
+          </section>
+
+          {/* Landing pages */}
+          <section
+            id="phone-lp"
+            className="px-6 py-10 text-white"
+            style={{ backgroundColor: '#262626' }}
+          >
+            <TopLp landingPages={landingPages} isLoading={isLoading} />
           </section>
 
           {/* Contact */}

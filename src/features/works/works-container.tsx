@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Heading, Skeleton, Title, PageShell } from '@/shared/ui'
-import { useWorks } from '@/shared/hooks'
+import { useProjects } from '@/shared/hooks'
 import { fadeInDown, fadeInUp, staggerContainer } from '@/shared/lib/animations'
 import { WorksList } from './ui'
 
@@ -26,7 +26,7 @@ const WorksSkeleton = () => (
 )
 
 export const WorksContainer = () => {
-  const { works, isLoading } = useWorks()
+  const { projects: works, isLoading } = useProjects('work')
 
   return (
     <PageShell>
