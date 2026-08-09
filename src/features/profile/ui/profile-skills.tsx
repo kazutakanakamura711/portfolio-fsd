@@ -10,6 +10,7 @@ type SkillsData = Omit<
   | 'name'
   | 'image'
   | 'about'
+  | 'careers'
 >
 
 const SKILL_LABELS: Record<keyof SkillsData, string> = {
