@@ -73,7 +73,7 @@ export const TopLp = ({ landingPages, isLoading }: Props) => {
       </motion.div>
 
       <motion.div variants={fadeInUp} className="w-full">
-        <TopWorksCarousel works={landingPages} />
+        <TopWorksCarousel works={landingPages} showGithub />
       </motion.div>
     </motion.section>
   )
