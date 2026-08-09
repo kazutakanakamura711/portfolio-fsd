@@ -19,6 +19,7 @@ import {
 
 type Props = {
   works: Projects[]
+  showGithub?: boolean
 }
 
 const splitTechnologies = (technologies: string): string[] => {
@@ -28,7 +29,7 @@ const splitTechnologies = (technologies: string): string[] => {
     .filter(Boolean)
 }
 
-export const TopWorksCarousel = ({ works }: Props) => {
+export const TopWorksCarousel = ({ works, showGithub = false }: Props) => {
   const [api, setApi] = useState<CarouselApi>()
   const [current, setCurrent] = useState(0)
   const [count, setCount] = useState(0)
@@ -132,6 +133,17 @@ export const TopWorksCarousel = ({ works }: Props) => {
                       <ExternalLink size={14} />
                       <span>Site</span>
                     </a>
+                    {showGithub && work.github_url && (
+                      <a
+                        href={work.github_url}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`${work.title} GitHub`}
+                        className="flex items-center gap-1 text-sm hover:opacity-60 transition-opacity"
+                      >
+                        <span>GitHub</span>
+                      </a>
+                    )}
                   </CardFooter>
                 </Card>
               </CarouselItem>
