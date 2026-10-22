@@ -4,9 +4,15 @@ React + TypeScript + Viteで構築したポートフォリオサイトです。
 
 🔗 **https://portfolio.sakura-kn.com**
 
+現在、本番サイトは **Vercel** でデプロイ・公開しています。デプロイ手順は [セットアップとデプロイ](docs/deployment.md) を参照してください。
+
 ## セットアップ
 
+Node.jsは `.nvmrc` の `24.22.1` を使用します。`nvm` でローカルとGitHub Actionsのビルド環境を揃えます。
+
 ```bash
+nvm install
+nvm use
 npm install
 cp .env.example .env.local
 npm run dev
